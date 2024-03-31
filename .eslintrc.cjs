@@ -34,12 +34,15 @@ module.exports = {
 				'plugin:react-hooks/recommended',
 				'plugin:jsx-a11y/recommended',
 			],
+			rules: {
+				'react/no-unescaped-entities': 'off',
+			},
 			settings: {
-				react: {
+				'react': {
 					version: 'detect',
 				},
-				formComponents: ['Form'],
-				linkComponents: [
+				'formComponents': ['Form'],
+				'linkComponents': [
 					{ name: 'Link', linkAttribute: 'to' },
 					{ name: 'NavLink', linkAttribute: 'to' },
 				],

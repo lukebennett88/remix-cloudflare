@@ -19,7 +19,10 @@
 		"module": "ESNext",
 		"moduleResolution": "Bundler",
 		"noEmit": true,
-		"paths": { "#app/*": ["./app/*"] },
+		"paths": {
+			"#app/*": ["./app/*"],
+			"#styled-system/*": ["./styled-system/*"]
+		},
 		"plugins": [{ "name": "@tokenami/ts-plugin" }],
 		"resolveJsonModule": true,
 		"skipLibCheck": true,

@@ -1,3 +1,5 @@
+import '#app/index.css';
+
 import {
 	Links,
 	Meta,
@@ -5,17 +7,14 @@ import {
 	Scripts,
 	ScrollRestoration,
 } from '@remix-run/react';
-import { css } from '@tokenami/css';
-
-import '#app/reset.css';
-import '#app/tokenami.css';
+import { css } from '#styled-system/css';
 
 export function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<html
 			lang="en"
-			style={css({
-				'--height': 'var(--size_full)',
+			className={css({
+				height: '100%',
 			})}
 		>
 			<head>
@@ -25,15 +24,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Links />
 			</head>
 			<body
-				style={css({
-					'--background-color': 'var(--background-color_accent)',
-					'--display': 'flex',
-					'--flex-direction': 'column',
-					'--font-family': 'var(--font-family_sans)',
-					'--height': 'var(--size_full)',
-					'--padding': 16,
-					'--bp10_padding': 20,
-					'--bp20_padding': 24,
+				className={css({
+					backgroundColor: 'background.accent',
+					display: 'flex',
+					flexDirection: 'column',
+					fontFamily: 'sans',
+					minHeight: '100%',
+					padding: 16,
+					bp10: {
+						padding: 20,
+					},
+					bp20: {
+						padding: 24,
+					},
 				})}
 			>
 				{children}

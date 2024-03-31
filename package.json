@@ -4,27 +4,24 @@
 	"sideEffects": false,
 	"type": "module",
 	"imports": {
-		"#app/*": "./app/*"
+		"#app/*": "./app/*",
+		"#styled-system/*": "./styled-system/*"
 	},
 	"scripts": {
-		"build": "pnpm build:css && pnpm build:remix",
-		"build:css": "pnpm tokenami --minify",
-		"build:remix": "remix vite:build",
+		"build": "remix vite:build",
 		"check": "pnpm run check:format && pnpm run check:lint && pnpm run check:types",
 		"check:format": "pnpm run format --check",
 		"check:lint": "pnpm run lint",
 		"check:types": "tsc --noEmit",
 		"deploy": "wrangler pages deploy ./build/client",
-		"dev": "concurrently \"pnpm:dev:*\"",
-		"dev:css": "pnpm tokenami --watch",
-		"dev:remix": "remix vite:dev",
+		"dev": "remix vite:dev",
 		"fix": "pnpm run fix:lint && pnpm run fix:format",
 		"fix:format": "pnpm run format --write",
 		"fix:lint": "pnpm run lint --fix",
 		"format": "prettier . --cache",
 		"lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+		"prepare": "panda codegen",
 		"start": "wrangler pages dev ./build/client",
-		"tokenami": "tokenami --output app/tokenami.css",
 		"typegen": "wrangler types"
 	},
 	"prettier": {
@@ -71,20 +68,16 @@
 		"@remix-run/cloudflare": "^2.8.1",
 		"@remix-run/cloudflare-pages": "^2.8.1",
 		"@remix-run/react": "^2.8.1",
-		"@tokenami/css": "0.0.37",
 		"isbot": "^5.1.2",
 		"miniflare": "^3.20240320.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
 	},
 	"devDependencies": {
-		"@capsizecss/core": "^4.1.0",
-		"@capsizecss/metrics": "^2.2.0",
 		"@cloudflare/workers-types": "^4.20240320.1",
 		"@ianvs/prettier-plugin-sort-imports": "^4.2.1",
+		"@pandacss/dev": "^0.36.1",
 		"@remix-run/dev": "^2.8.1",
-		"@tokenami/dev": "0.0.37",
-		"@tokenami/ts-plugin": "0.0.37",
 		"@types/react": "^18.2.73",
 		"@types/react-dom": "^18.2.23",
 		"@typescript-eslint/eslint-plugin": "^7.4.0",
@@ -97,15 +90,17 @@
 		"eslint-plugin-react": "^7.34.1",
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"node-fetch": "^3.3.2",
+		"panda": "^0.6.5",
 		"prettier-plugin-packagejson": "^2.4.13",
 		"typescript": "^5.4.3",
 		"vite": "^5.2.6",
 		"wrangler": "^3.39.0"
 	},
+	"packageManager": "pnpm@8.15.5+sha256.4b4efa12490e5055d59b9b9fc9438b7d581a6b7af3b5675eb5c5f447cee1a589",
 	"engines": {
 		"node": ">=18.0.0"
 	},
 	"volta": {
-		"node": "20.11.1"
+		"node": "20.12.0"
 	}
 }
