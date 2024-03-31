@@ -1,7 +1,42 @@
 import { createConfig, defaultConfig } from '@tokenami/css';
 
 import { theme } from '../app/theme/light/theme';
-import { typography } from '../app/theme/typography';
+
+export const typography = {
+	'font-size': {
+		'12': `${12 / 16}rem`,
+		'14': `${14 / 16}rem`,
+		'16': `${16 / 16}rem`,
+		'18': `${18 / 16}rem`,
+		'20': `${20 / 16}rem`,
+		'24': `${24 / 16}rem`,
+		'28': `${28 / 16}rem`,
+		'35': `${35 / 16}rem`,
+		'60': `${60 / 16}rem`,
+	},
+	'leading': {
+		'12': `${16 / 16}rem`,
+		'14': `${20 / 16}rem`,
+		'16': `${24 / 16}rem`,
+		'18': `${26 / 16}rem`,
+		'20': `${28 / 16}rem`,
+		'24': `${30 / 16}rem`,
+		'28': `${36 / 16}rem`,
+		'35': `${40 / 16}rem`,
+		'60': `${60 / 16}rem`,
+	},
+	'tracking': {
+		'12': '0.0025em',
+		'14': '0em',
+		'16': '0em',
+		'18': '-0.0025em',
+		'20': '-0.005em',
+		'24': '-0.00625em',
+		'28': '-0.0075em',
+		'35': '-0.01em',
+		'60': '-0.025em',
+	},
+};
 
 export default createConfig({
 	include: ['./app/**/*.{ts,tsx}'],
