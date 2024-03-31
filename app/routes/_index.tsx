@@ -1,5 +1,7 @@
 import type { MetaFunction } from '@remix-run/cloudflare';
+import { css } from '@tokenami/css';
 
+import { Me } from '../components/me';
 import * as recipe from '../recipes';
 
 export const meta: MetaFunction = () => {
@@ -22,153 +24,34 @@ export default function Index() {
 				'--padding': 16,
 				'--bp10_padding': 20,
 				'--bp20_padding': 24,
-				'--selection_background-color': 'var(--background-color_accent)',
-				'--selection_color': 'var(--text-color_neutral-inverse)',
 			})}
 		>
 			<div
 				style={recipe.stack({
-					'--gap': 16,
-					'--max-inline-size': 'var(--size_20)',
 					'--margin': 'var(--size_auto)',
 				})}
 			>
-				<p
+				<h1
 					style={recipe.typography(
-						{
-							size: '60',
-						},
-						{
-							'--background-color': 'var(--background-color_accent-inverse)',
-							'--hover_background-color': 'var(--background-color_accent)',
-							'--hover_color': 'var(--text-color_neutral-inverse)',
-							'--transition-property': 'background-color, color',
-							'--transition-duration': '0.2s',
-							'--transition-timing-function': 'var(--ease_in-out)',
-						},
+						{ size: '60' },
+						{ '--font-family': 'var(--font-family_rounded)' },
 					)}
 				>
-					Typography (60px)
+					Luke Bennett
+				</h1>
+				<p style={recipe.typography({ size: '35' })}>
+					Design Engineer at{' '}
+					<a
+						href="https://thinkmill.com.au"
+						style={css({
+							'--text-decoration': 'underline',
+							'--color': 'var(--text-color_accent)',
+						})}
+					>
+						Thinkmill
+					</a>
 				</p>
-				<p
-					style={recipe.typography(
-						{
-							size: '35',
-						},
-						{
-							'--background-color': 'var(--background-color_accent-inverse)',
-							'--hover_background-color': 'var(--background-color_accent)',
-							'--hover_color': 'var(--text-color_neutral-inverse)',
-							'--transition-property': 'background-color, color',
-							'--transition-duration': '0.2s',
-							'--transition-timing-function': 'var(--ease_in-out)',
-						},
-					)}
-				>
-					Typography (35px)
-				</p>
-				<p
-					style={recipe.typography(
-						{
-							size: '28',
-						},
-						{
-							'--background-color': 'var(--background-color_accent-inverse)',
-							'--hover_background-color': 'var(--background-color_accent)',
-							'--hover_color': 'var(--text-color_neutral-inverse)',
-							'--transition-property': 'background-color, color',
-							'--transition-duration': '0.2s',
-							'--transition-timing-function': 'var(--ease_in-out)',
-						},
-					)}
-				>
-					Typography (28px)
-				</p>
-				<p
-					style={recipe.typography(
-						{
-							size: '24',
-						},
-						{
-							'--background-color': 'var(--background-color_accent-inverse)',
-							'--hover_background-color': 'var(--background-color_accent)',
-							'--hover_color': 'var(--text-color_neutral-inverse)',
-							'--transition-property': 'background-color, color',
-							'--transition-duration': '0.2s',
-							'--transition-timing-function': 'var(--ease_in-out)',
-						},
-					)}
-				>
-					Typography (24px)
-				</p>
-				<p
-					style={recipe.typography(
-						{
-							size: '18',
-						},
-						{
-							'--background-color': 'var(--background-color_accent-inverse)',
-							'--hover_background-color': 'var(--background-color_accent)',
-							'--hover_color': 'var(--text-color_neutral-inverse)',
-							'--transition-property': 'background-color, color',
-							'--transition-duration': '0.2s',
-							'--transition-timing-function': 'var(--ease_in-out)',
-						},
-					)}
-				>
-					Typography (18px)
-				</p>
-				<p
-					style={recipe.typography(
-						{
-							size: '16',
-						},
-						{
-							'--background-color': 'var(--background-color_accent-inverse)',
-							'--hover_background-color': 'var(--background-color_accent)',
-							'--hover_color': 'var(--text-color_neutral-inverse)',
-							'--transition-property': 'background-color, color',
-							'--transition-duration': '0.2s',
-							'--transition-timing-function': 'var(--ease_in-out)',
-						},
-					)}
-				>
-					Typography (16px)
-				</p>
-				<p
-					style={recipe.typography(
-						{
-							size: '14',
-						},
-						{
-							'--background-color': 'var(--background-color_accent-inverse)',
-							'--hover_background-color': 'var(--background-color_accent)',
-							'--hover_color': 'var(--text-color_neutral-inverse)',
-							'--transition-property': 'background-color, color',
-							'--transition-duration': '0.2s',
-							'--transition-timing-function': 'var(--ease_in-out)',
-						},
-					)}
-				>
-					Typography (14px)
-				</p>
-				<p
-					style={recipe.typography(
-						{
-							size: '12',
-						},
-						{
-							'--background-color': 'var(--background-color_accent-inverse)',
-							'--hover_background-color': 'var(--background-color_accent)',
-							'--hover_color': 'var(--text-color_neutral-inverse)',
-							'--transition-property': 'background-color, color',
-							'--transition-duration': '0.2s',
-							'--transition-timing-function': 'var(--ease_in-out)',
-						},
-					)}
-				>
-					Typography (12px)
-				</p>
+				<Me />
 			</div>
 		</main>
 	);

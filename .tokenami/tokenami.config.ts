@@ -18,6 +18,7 @@ export default createConfig({
 		'border-inline-start-color': ['border-color'],
 		'color': ['text-color'],
 		'font-family': ['font-family'],
+		'fill': ['background-color', 'border-color', 'text-color'],
 		'margin': ['grid', 'size'],
 		'margin-block': ['grid', 'size'],
 		'margin-block-end': ['grid', 'size'],
@@ -25,10 +26,6 @@ export default createConfig({
 		'margin-inline': ['grid', 'size'],
 		'margin-inline-end': ['grid', 'size'],
 		'margin-inline-start': ['grid', 'size'],
-	},
-	selectors: {
-		...defaultConfig['selectors'],
-		selection: '&::selection',
 	},
 	responsive: {
 		bp10: '@media (min-width: 640px)',
@@ -55,7 +52,9 @@ export default createConfig({
 			'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
 		},
 		'font-family': {
-			sans: "ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif",
+			sans: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
+			rounded:
+				"ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif",
 			mono: "ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace",
 		},
 		'font-size': {

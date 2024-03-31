@@ -78,8 +78,6 @@
 		"react-dom": "^18.2.0"
 	},
 	"devDependencies": {
-		"@capsizecss/core": "^4.1.0",
-		"@capsizecss/metrics": "^2.2.0",
 		"@cloudflare/workers-types": "^4.20240320.1",
 		"@ianvs/prettier-plugin-sort-imports": "^4.2.1",
 		"@remix-run/dev": "^2.8.1",

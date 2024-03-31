@@ -34,12 +34,6 @@ dependencies:
     version: 18.2.0(react@18.2.0)
 
 devDependencies:
-  '@capsizecss/core':
-    specifier: ^4.1.0
-    version: 4.1.0
-  '@capsizecss/metrics':
-    specifier: ^2.2.0
-    version: 2.2.0
   '@cloudflare/workers-types':
     specifier: ^4.20240320.1
     version: 4.20240320.1
@@ -448,16 +442,6 @@ packages:
       '@babel/helper-string-parser': 7.24.1
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
-    dev: true
-
-  /@capsizecss/core@4.1.0:
-    resolution: {integrity: sha512-Slv4dZLUNmaBEi4Wtowr64fSAqXgpGMlSIlQf6fA3Icv2y5xYi6SJvT/mA3IKkO1NlwPR6sTX5ZnMD3jBA2YFQ==}
-    dependencies:
-      csstype: 3.1.3
-    dev: true
-
-  /@capsizecss/metrics@2.2.0:
-    resolution: {integrity: sha512-DkFIser1KbGxWyG2hhQQeCit72TnOQDx5pr9bkA7+XlIy7qv+4lYtslH3bidVxm2qkY2guAgypSIPYuQQuk70A==}
     dev: true
 
   /@cloudflare/kv-asset-handler@0.1.3:
