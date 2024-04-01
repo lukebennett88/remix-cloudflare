@@ -24,7 +24,7 @@ export const meta: MetaFunction = () => {
 	];
 };
 
-export default function Index() {
+export default function Page() {
 	const document = useLoaderData<typeof loader>();
 	return (
 		<div
