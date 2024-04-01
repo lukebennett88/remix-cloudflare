@@ -140,6 +140,9 @@ const linkToneMap = {
 	neutral: {
 		'--color': 'var(--text-color_neutral)',
 	},
+	muted: {
+		'--color': 'var(--text-color_neutral-muted)',
+	},
 	accent: {
 		'--color': 'var(--text-color_accent)',
 	},
