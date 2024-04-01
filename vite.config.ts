@@ -11,5 +11,6 @@ export default defineConfig({
 	},
 	ssr: {
 		noExternal: [/^@keystatic\//, 'minimatch'],
+		target: 'webworker',
 	},
 });
