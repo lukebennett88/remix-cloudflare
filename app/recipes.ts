@@ -3,7 +3,7 @@ import fontMetrics from '@capsizecss/metrics/helveticaNeue';
 import { css } from '@tokenami/css';
 import { typedKeys } from 'emery';
 
-type TokenamiProperties = Parameters<typeof css>[0];
+export type TokenamiProperties = Parameters<typeof css>[0];
 
 // Visually Hidden -------------------------------------------------------------
 
@@ -29,7 +29,7 @@ const verticalAlignMap = {
 	end: 'flex-end',
 } as const;
 
-type TrackArgs = {
+export type TrackArgs = {
 	verticalAlign?: keyof typeof verticalAlignMap;
 };
 
@@ -52,7 +52,7 @@ export function track({ verticalAlign = 'center' }: TrackArgs = {}) {
 
 // Typography ------------------------------------------------------------------
 
-type StyleObject = ReturnType<typeof createStyleObject>;
+export type StyleObject = ReturnType<typeof createStyleObject>;
 
 function createLogicalCapsizeStyleObject({
 	fontSize,
@@ -97,7 +97,7 @@ const typographyKeys = [
 	'60',
 ] as const;
 
-type TypographyKey = (typeof typographyKeys)[number];
+export type TypographyKey = (typeof typographyKeys)[number];
 
 const typographyMap = {
 	'12': createTypographyVariant(12, 16, '0.0025em'),
@@ -113,7 +113,7 @@ const typographyMap = {
 
 const breakpoints = ['bp10', 'bp20', 'bp30', 'bp40', 'bp50', 'bp60'];
 
-type Breakpoint = (typeof breakpoints)[number];
+export type Breakpoint = (typeof breakpoints)[number];
 
 function prefixStylesForBreakpoint(
 	styles: TokenamiProperties,
@@ -130,7 +130,7 @@ function prefixStylesForBreakpoint(
 	return prefixedStyles as TokenamiProperties;
 }
 
-type TypographyArgs = {
+export type TypographyArgs = {
 	size?:
 		| keyof typeof typographyMap
 		| Partial<Record<'base' | Breakpoint, keyof typeof typographyMap>>;
@@ -255,7 +255,7 @@ const linkToneMap = {
 	},
 } satisfies Record<string, TokenamiProperties>;
 
-type LinkArgs = {
+export type LinkArgs = {
 	tone?: keyof typeof linkToneMap;
 };
 
@@ -284,7 +284,7 @@ const containerMap = {
 	},
 } satisfies Record<string, TokenamiProperties>;
 
-type ContainerArgs = {
+export type ContainerArgs = {
 	size: keyof typeof containerMap;
 };
 

@@ -1,8 +1,8 @@
-import type { MetaFunction } from '@remix-run/cloudflare';
+import { type MetaFunction } from '@remix-run/cloudflare';
 import { css } from '@tokenami/css';
 
-import { Me } from '../components/me';
-import * as recipe from '../recipes';
+import { Me } from '#app/components/me';
+import * as recipe from '#app/recipes';
 
 export const meta: MetaFunction = () => {
 	return [
