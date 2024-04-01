@@ -4,42 +4,24 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useLocation,
 } from '@remix-run/react';
 import { css } from '@tokenami/css';
+import * as React from 'react';
 
+import { ExternalNav, InternalNav } from '#app/components/nav';
 import * as recipe from '#app/recipes';
 
 import '#app/reset.css';
 import '#app/tokenami.css';
 
-import { ExternalNav, InternalNav } from './components/nav';
-
 export function Layout({ children }: { children: React.ReactNode }) {
-	return (
-		<html
-			lang="en"
-			style={css({
-				'--height': 'var(--size_full)',
-			})}
-		>
-			<head>
-				<meta charSet="utf-8" />
-				<meta content="width=device-width, initial-scale=1" name="viewport" />
-				<Meta />
-				<Links />
-			</head>
-			<body
-				style={css({
-					'--background-color': 'var(--background-color_accent)',
-					'--display': 'flex',
-					'--flex-direction': 'column',
-					'--font-family': 'var(--font-family_sans)',
-					'--min-height': 'var(--size_full)',
-					'--padding': 16,
-					'--bp10_padding': 20,
-					'--bp20_padding': 24,
-				})}
-			>
+	const location = useLocation();
+	const isKeystaticRoute = location.pathname.startsWith('/keystatic');
+
+	function NormalRoute() {
+		return (
+			<React.Fragment>
 				<InternalNav />
 				<main
 					style={css({
@@ -65,6 +47,38 @@ export function Layout({ children }: { children: React.ReactNode }) {
 					</div>
 				</main>
 				<ExternalNav />
+			</React.Fragment>
+		);
+	}
+
+	return (
+		<html
+			lang="en"
+			style={css({
+				'--height': 'var(--size_full)',
+			})}
+		>
+			<head>
+				<meta charSet="utf-8" />
+				<meta content="width=device-width, initial-scale=1" name="viewport" />
+				<Meta />
+				<Links />
+			</head>
+			<body
+				{...(!isKeystaticRoute && {
+					style: css({
+						'--background-color': 'var(--background-color_accent)',
+						'--display': 'flex',
+						'--flex-direction': 'column',
+						'--font-family': 'var(--font-family_sans)',
+						'--min-height': 'var(--size_full)',
+						'--padding': 16,
+						'--bp10_padding': 20,
+						'--bp20_padding': 24,
+					}),
+				})}
+			>
+				{isKeystaticRoute ? children : <NormalRoute />}
 				<ScrollRestoration />
 				<Scripts />
 			</body>

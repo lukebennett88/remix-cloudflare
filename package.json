@@ -67,6 +67,8 @@
 		]
 	},
 	"dependencies": {
+		"@keystatic/core": "^0.5.9",
+		"@keystatic/remix": "^5.0.0",
 		"@radix-ui/colors": "^3.0.0",
 		"@remix-run/cloudflare": "^2.8.1",
 		"@remix-run/cloudflare-pages": "^2.8.1",
