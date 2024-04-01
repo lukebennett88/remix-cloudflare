@@ -34,12 +34,15 @@ module.exports = {
 				'plugin:react-hooks/recommended',
 				'plugin:jsx-a11y/recommended',
 			],
+			rules: {
+				'react/jsx-sort-props': 'warn',
+			},
 			settings: {
-				react: {
+				'react': {
 					version: 'detect',
 				},
-				formComponents: ['Form'],
-				linkComponents: [
+				'formComponents': ['Form'],
+				'linkComponents': [
 					{ name: 'Link', linkAttribute: 'to' },
 					{ name: 'NavLink', linkAttribute: 'to' },
 				],
