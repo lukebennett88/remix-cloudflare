@@ -2,7 +2,7 @@ import { orangeP3, sandP3 } from '@radix-ui/colors';
 
 export const theme = {
 	'background-color': {
-		neutral: sandP3.sand1,
+		'neutral': sandP3.sand1,
 		'neutral-hover': sandP3.sand2,
 		'neutral-pressed': sandP3.sand3,
 		'neutral-disabled': sandP3.sand4,
@@ -11,7 +11,7 @@ export const theme = {
 		'neutral-inverse-hover': sandP3.sand11,
 		'neutral-inverse-pressed': sandP3.sand10,
 		'neutral-inverse-disabled': sandP3.sand9,
-		accent: orangeP3.orange9,
+		'accent': orangeP3.orange9,
 		'accent-hover': orangeP3.orange8,
 		'accent-pressed': orangeP3.orange7,
 		'accent-disabled': orangeP3.orange6,
@@ -38,10 +38,10 @@ export const theme = {
 		inverse: sandP3.sand12,
 	},
 	'text-color': {
-		neutral: sandP3.sand12,
+		'neutral': sandP3.sand12,
 		'neutral-muted': sandP3.sand11,
-		accent: orangeP3.orange12,
-		'accent-muted': orangeP3.orange11,
+		'accent': orangeP3.orange10,
+		'accent-muted': orangeP3.orange9,
 		'neutral-inverse': sandP3.sand1,
 		'neutral-inverse-muted': sandP3.sand2,
 		'accent-inverse': orangeP3.orange1,

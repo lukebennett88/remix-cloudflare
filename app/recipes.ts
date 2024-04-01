@@ -35,30 +35,18 @@ type TrackArgs = {
 
 export function track({ verticalAlign = 'center' }: TrackArgs = {}) {
 	return {
-		root: (overrides?: TokenamiProperties) =>
-			css(
-				{
-					'--display': 'flex',
-					'--align-items': verticalAlignMap[verticalAlign],
-				},
-				overrides,
-			),
-		center: (overrides?: TokenamiProperties) =>
-			css(
-				{
-					'--flex-grow': 1,
-					'--min-width': 0,
-				},
-				overrides,
-			),
-		rail: (overrides?: TokenamiProperties) =>
-			css(
-				{
-					'--display': 'inline-flex',
-					'--flex-shrink': 0,
-				},
-				overrides,
-			),
+		root: css({
+			'--display': 'flex',
+			'--align-items': verticalAlignMap[verticalAlign],
+		}),
+		center: css({
+			'--flex-grow': 1,
+			'--min-width': 0,
+		}),
+		rail: css({
+			'--display': 'inline-flex',
+			'--flex-shrink': 0,
+		}),
 	};
 }
 
@@ -119,21 +107,81 @@ type TypographyArgs = {
 	size?: keyof typeof typographyMap;
 };
 
-export function typography(
-	{ size = '16' }: TypographyArgs = {},
-	overrides?: TokenamiProperties,
-) {
-	return css(typographyMap[size], overrides);
+export function typography({ size = '16' }: TypographyArgs = {}) {
+	return css(typographyMap[size]);
 }
 
 // Stack -----------------------------------------------------------------------
 
-export function stack(overrides?: TokenamiProperties) {
+export function stack() {
+	return css({
+		'--display': 'flex',
+		'--flex-direction': 'column',
+	});
+}
+
+// Focus ring ------------------------------------------------------------------
+
+export function focusRing(overrides?: TokenamiProperties) {
 	return css(
 		{
-			'--display': 'flex',
-			'--flex-direction': 'column',
+			'--focus-visible_outline-color': 'var(--border-color_accent)',
+			'--focus-visible_outline-offset': 2,
+			'--focus-visible_outline-style': 'dashed',
+			'--focus-visible_outline-width': 2,
 		},
 		overrides,
 	);
+}
+
+// Link ------------------------------------------------------------------------
+
+const linkToneMap = {
+	neutral: {
+		'--color': 'var(--text-color_neutral)',
+	},
+	accent: {
+		'--color': 'var(--text-color_accent)',
+	},
+} satisfies Record<string, TokenamiProperties>;
+
+type LinkArgs = {
+	tone?: keyof typeof linkToneMap;
+};
+
+export function link({ tone = 'neutral' }: LinkArgs = {}) {
+	return css({
+		...focusRing(),
+		...linkToneMap[tone],
+		'--text-decoration': 'underline',
+	});
+}
+
+// Container -------------------------------------------------------------------
+
+const containerMap = {
+	'10': {
+		'--max-inline-size': 'var(--size_10)',
+	},
+	'20': {
+		'--max-inline-size': 'var(--size_20)',
+	},
+	'30': {
+		'--max-inline-size': 'var(--size_30)',
+	},
+	'40': {
+		'--max-inline-size': 'var(--size_40)',
+	},
+} satisfies Record<string, TokenamiProperties>;
+
+type ContainerArgs = {
+	size: keyof typeof containerMap;
+};
+
+export function container({ size }: ContainerArgs) {
+	return css({
+		...containerMap[size],
+		'--margin-inline': 'var(--size_auto)',
+		'--inline-size': 'var(--size_full)',
+	});
 }

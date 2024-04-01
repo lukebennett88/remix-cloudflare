@@ -16,43 +16,43 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
 	return (
-		<main
-			style={recipe.stack({
-				'--background-color': 'var(--background-color_neutral)',
-				'--color': 'var(--text-color_neutral)',
-				'--flex': '1',
-				'--padding': 16,
-				'--bp10_padding': 20,
-				'--bp20_padding': 24,
+		<div
+			style={css({
+				...recipe.stack(),
+				...recipe.container({ size: '20' }),
+				'--gap': 60,
+				'--inline-size': 'var(--size_full)',
+				'--margin': 'var(--size_auto)',
+				'--text-align': 'center',
 			})}
 		>
-			<div
-				style={recipe.stack({
-					'--margin': 'var(--size_auto)',
+			<h1
+				style={css({
+					...recipe.typography({ size: '60' }),
+					'--font-weight': 'var(--weight_700)',
 				})}
 			>
-				<h1
-					style={recipe.typography(
-						{ size: '60' },
-						{ '--font-family': 'var(--font-family_rounded)' },
-					)}
+				Luke Bennett
+			</h1>
+			<Me />
+			<p
+				style={css({
+					...recipe.typography({ size: '35' }),
+					'--color': 'var(--text-color_neutral-muted)',
+				})}
+			>
+				Design Engineer at{' '}
+				<a
+					href="https://thinkmill.com.au"
+					style={css({
+						...recipe.link({
+							tone: 'accent',
+						}),
+					})}
 				>
-					Luke Bennett
-				</h1>
-				<p style={recipe.typography({ size: '35' })}>
-					Design Engineer at{' '}
-					<a
-						href="https://thinkmill.com.au"
-						style={css({
-							'--text-decoration': 'underline',
-							'--color': 'var(--text-color_accent)',
-						})}
-					>
-						Thinkmill
-					</a>
-				</p>
-				<Me />
-			</div>
-		</main>
+					Thinkmill
+				</a>
+			</p>
+		</div>
 	);
 }
