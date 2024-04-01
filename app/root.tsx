@@ -84,6 +84,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 						'--padding': 16,
 						'--bp10_padding': 20,
 						'--bp20_padding': 24,
+						'--selection_background-color': 'var(--background-color_accent)',
+						'--selection_color': 'var(--text-color_accent-inverse)',
 					}),
 				})}
 			>

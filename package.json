@@ -75,10 +75,10 @@
 		"@remix-run/cloudflare": "^2.8.1",
 		"@remix-run/cloudflare-pages": "^2.8.1",
 		"@remix-run/react": "^2.8.1",
-		"@tokenami/css": "0.0.38",
+		"@tokenami/css": "0.0.39",
 		"emery": "^1.4.3",
 		"isbot": "^5.1.3",
-		"miniflare": "^3.20240320.1",
+		"miniflare": "^3.20240329.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
 	},
@@ -86,8 +86,8 @@
 		"@cloudflare/workers-types": "^4.20240329.0",
 		"@ianvs/prettier-plugin-sort-imports": "^4.2.1",
 		"@remix-run/dev": "^2.8.1",
-		"@tokenami/dev": "0.0.38",
-		"@tokenami/ts-plugin": "0.0.38",
+		"@tokenami/dev": "0.0.39",
+		"@tokenami/ts-plugin": "0.0.39",
 		"@types/react": "^18.2.73",
 		"@types/react-dom": "^18.2.23",
 		"@typescript-eslint/eslint-plugin": "^7.4.0",
@@ -103,7 +103,7 @@
 		"prettier-plugin-packagejson": "^2.4.14",
 		"typescript": "^5.4.3",
 		"vite": "^5.2.7",
-		"wrangler": "^3.41.0"
+		"wrangler": "^3.42.0"
 	},
 	"packageManager": "pnpm@8.15.5+sha256.4b4efa12490e5055d59b9b9fc9438b7d581a6b7af3b5675eb5c5f447cee1a589",
 	"engines": {

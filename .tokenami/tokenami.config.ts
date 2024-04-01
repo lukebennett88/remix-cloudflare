@@ -274,6 +274,10 @@ export default createConfig({
 		bp50: '@media (min-width: 1536px)',
 		bp60: '@media (min-width: 1920px)',
 	},
+	selectors: {
+		...defaultConfig['selectors'],
+		selection: '&::selection',
+	},
 	theme: {
 		...createTheme('light'),
 	},
