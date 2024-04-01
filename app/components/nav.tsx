@@ -90,11 +90,10 @@ function Nav({ justifyContent = 'start', links, ...consumerProps }: NavProps) {
 			>
 				<ul
 					style={css({
-						'--pointer-events': 'auto',
 						'--display': 'flex',
 						'--gap': 8,
 						'--margin-block-start': 'var(--size_auto)',
-						'--padding': 6,
+						'--pointer-events': 'auto',
 					})}
 				>
 					{links.map(({ href, label }) => {
