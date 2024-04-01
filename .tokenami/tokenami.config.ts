@@ -41,6 +41,16 @@ export const typography = {
 export default createConfig({
 	include: ['./app/**/*.{ts,tsx}'],
 	grid: `${1 / 16}rem`,
+	keyframes: {
+		steamFade: {
+			'0%, 100%': { opacity: '0' },
+			'50%': { opacity: '1' },
+		},
+		steamTransform: {
+			'0%': { transform: 'translateY(0.5rem) scale(0.9)' },
+			'100%': { transform: 'translate(-0.125rem) scale(1.1)' },
+		},
+	},
 	properties: {
 		...defaultConfig['properties'],
 		'background-color': ['background-color'],
@@ -72,7 +82,10 @@ export default createConfig({
 	},
 	theme: {
 		'alpha': {},
-		'anim': {},
+		'anim': {
+			steamRise:
+				'3s ease-in-out infinite steamFade, 3s cubic-bezier(0.4, 0, 0.2, 1) infinite steamTransform',
+		},
 		'background-color': {
 			...theme['background-color'],
 		},
@@ -88,7 +101,7 @@ export default createConfig({
 		},
 		'font-family': {
 			sans: "Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif",
-			rounded:
+			display:
 				"ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif",
 			mono: "ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace",
 		},
