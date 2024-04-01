@@ -61,6 +61,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
 			<head>
 				<meta charSet="utf-8" />
 				<meta content="width=device-width, initial-scale=1" name="viewport" />
+				<link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+				{/* <link
+					href="/favicon-dark.svg"
+					media="(prefers-color-scheme: dark)"
+					rel="icon"
+					type="image/svg+xml"
+				/> */}
+				<link href="/apple-touch-icon.png" rel="apple-touch-icon" />
+				<link href="/manifest.webmanifest" rel="manifest" />
 				<Meta />
 				<Links />
 			</head>
