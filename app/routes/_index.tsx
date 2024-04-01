@@ -28,7 +28,9 @@ export default function Index() {
 		>
 			<h1
 				style={css({
-					...recipe.typography({ size: '60' }),
+					...recipe.typography({
+						size: '35',
+					}),
 					'--font-weight': 'var(--weight_700)',
 				})}
 			>
@@ -37,7 +39,9 @@ export default function Index() {
 			<Me />
 			<p
 				style={css({
-					...recipe.typography({ size: '35' }),
+					...recipe.typography({
+						size: '20',
+					}),
 					'--color': 'var(--text-color_neutral-muted)',
 				})}
 			>
