@@ -84,7 +84,8 @@ function Nav({ justifyContent = 'start', links, ...consumerProps }: NavProps) {
 				style={css({
 					...recipe.container({ size: '40' }),
 					'--display': 'flex',
-					'--justify-content': justifyContent,
+					'--justify-content': 'start',
+					'--bp10_justify-content': justifyContent,
 					'--flex-wrap': 'wrap',
 				})}
 			>
