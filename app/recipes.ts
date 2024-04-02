@@ -30,13 +30,17 @@ const verticalAlignMap = {
 } as const;
 
 export type TrackArgs = {
+	isInline?: boolean;
 	verticalAlign?: keyof typeof verticalAlignMap;
 };
 
-export function track({ verticalAlign = 'center' }: TrackArgs = {}) {
+export function track({
+	isInline = false,
+	verticalAlign = 'center',
+}: TrackArgs = {}) {
 	return {
 		root: css({
-			'--display': 'flex',
+			'--display': isInline ? 'inline-flex' : 'flex',
 			'--align-items': verticalAlignMap[verticalAlign],
 		}),
 		center: css({

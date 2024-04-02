@@ -1,3 +1,4 @@
+import { createReader } from '@keystatic/core/reader';
 import { createGitHubReader } from '@keystatic/core/reader/github';
 
 import config from '../keystatic.config';
@@ -18,7 +19,10 @@ globalThis.fetch = async (url, init) => {
 	return originalFetch(url, { ...init, headers });
 };
 
-export const reader = createGitHubReader(config, {
-	repo: 'lukebennett88/remix-cloudflare',
-	token: process.env.GITHUB_TOKEN,
-});
+export const reader =
+	import.meta.env.DEV ?
+		createReader(process.cwd(), config)
+	:	createGitHubReader(config, {
+			repo: 'lukebennett88/remix-cloudflare',
+			token: process.env.GITHUB_TOKEN,
+		});

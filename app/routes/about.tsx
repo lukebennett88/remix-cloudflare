@@ -11,7 +11,10 @@ export const loader = async () => {
 	if (!page) {
 		throw new Response('Not found', { status: 404 });
 	}
-	return await page.content();
+
+	return {
+		document: await page.content(),
+	};
 };
 
 export const meta: MetaFunction = () => {
@@ -25,12 +28,14 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Page() {
-	const document = useLoaderData<typeof loader>();
+	const { document } = useLoaderData<typeof loader>();
+
 	return (
 		<div
 			style={css({
 				...recipe.stack(),
 				'--gap': 12,
+				'--inline-size': 'var(--size_full)',
 				'--margin': 'var(--size_auto)',
 				'--max-inline-size': 'var(---,60ch)',
 			})}

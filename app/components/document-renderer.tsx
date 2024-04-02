@@ -1,10 +1,14 @@
 import {
 	DocumentRenderer as KeystaticDocumentRenderer,
-	type DocumentRendererProps,
+	type DocumentRendererProps as KeystaticDocumentRendererProps,
 } from '@keystatic/core/renderer';
 import { css } from '@tokenami/css';
 
-import * as recipe from '#app/recipes';
+import { CodeBlock } from '../code-block';
+import { Heading } from './heading';
+import { Link } from './link';
+
+interface DocumentRendererProps extends KeystaticDocumentRendererProps {}
 
 export function DocumentRenderer(props: DocumentRendererProps) {
 	return (
@@ -12,28 +16,57 @@ export function DocumentRenderer(props: DocumentRendererProps) {
 			{...props}
 			renderers={{
 				block: {
+					code(props) {
+						return <CodeBlock {...props} />;
+					},
 					heading(props) {
-						const Tag = `h${props.level}` as const;
-						const sizeMap = {
-							'1': '35',
-							'2': '28',
-							'3': '24',
-							'4': '20',
-							'5': '16',
-							'6': '16',
-						} as const satisfies Record<typeof props.level, recipe.Breakpoint>;
+						return <Heading {...props} />;
+					},
+				},
+				inline: {
+					code(props) {
 						return (
-							<Tag
+							<code
 								style={css({
-									...recipe.typography({
-										size: sizeMap[props.level],
-									}),
-									'--font-weight':
-										props.level === 1 ? 'var(--weight_700)' : undefined,
+									'--font-family': 'var(--font-family_mono)',
 								})}
 							>
 								{props.children}
-							</Tag>
+							</code>
+						);
+					},
+					link(props) {
+						return <Link {...props} />;
+					},
+					bold(props) {
+						return (
+							<strong style={css({ '--font-weight': 'var(--weight_700)' })}>
+								{props.children}
+							</strong>
+						);
+					},
+					italic(props) {
+						return (
+							<em style={css({ '--font-style': 'italic' })}>
+								{props.children}
+							</em>
+						);
+					},
+					keyboard(props) {
+						return <kbd>{props.children}</kbd>;
+					},
+					strikethrough(props) {
+						return (
+							<s style={css({ '--text-decoration-line': 'line-through' })}>
+								{props.children}
+							</s>
+						);
+					},
+					underline(props) {
+						return (
+							<u style={css({ '--text-decoration': 'underline' })}>
+								{props.children}
+							</u>
 						);
 					},
 				},
