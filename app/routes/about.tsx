@@ -31,6 +31,7 @@ export default function Page() {
 			style={css({
 				...recipe.stack(),
 				'--gap': 12,
+				'--margin': 'var(--size_auto)',
 				'--max-inline-size': 'var(---,60ch)',
 			})}
 		>
