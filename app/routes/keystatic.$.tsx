@@ -1,5 +1,8 @@
-import { makePage } from '@keystatic/remix/ui';
+import { Keystatic } from '#app/keystatic.client';
 
-import config from '../../keystatic.config';
-
-export default makePage(config);
+export default function Page() {
+	if (typeof window === 'undefined' || typeof document === 'undefined') {
+		return null;
+	}
+	return <Keystatic />;
+}
