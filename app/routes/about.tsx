@@ -3,11 +3,11 @@ import { useLoaderData } from '@remix-run/react';
 import { css } from '@tokenami/css';
 
 import { DocumentRenderer } from '#app/components/document-renderer';
-import { getReader } from '#app/reader.server.js';
+import { reader } from '#app/reader.server.js';
 import * as recipe from '#app/recipes';
 
 export const loader = async () => {
-	const page = await getReader().singletons.about.read();
+	const page = await reader.singletons.about.read();
 	if (!page) {
 		throw new Response('Not found', { status: 404 });
 	}
