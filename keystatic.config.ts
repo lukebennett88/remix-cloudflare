@@ -1,8 +1,17 @@
 import { collection, config, fields, singleton } from '@keystatic/core';
+import { cloudImage as keystaticCloudImage } from '@keystatic/core/component-blocks';
+
+const cloudImage = keystaticCloudImage({
+	label: 'Cloud Image',
+});
+
+export const componentBlocks = {
+	cloudImage,
+};
 
 const content = fields.document({
 	label: 'Content',
-	// componentBlocks,
+	componentBlocks,
 	formatting: true,
 	dividers: true,
 	links: true,
@@ -46,7 +55,7 @@ export default config({
 				}),
 				content: fields.document({
 					label: 'Content',
-					// componentBlocks,
+					componentBlocks,
 					formatting: true,
 					dividers: true,
 					links: true,

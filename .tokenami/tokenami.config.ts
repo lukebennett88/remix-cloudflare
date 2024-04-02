@@ -215,6 +215,12 @@ function createTheme(mode: 'light' | 'dark') {
 			...typography['tracking'],
 		},
 		'transition': {},
+		'transition-duration': {
+			'150ms': '150ms',
+			'200ms': '200ms',
+			'300ms': '300ms',
+			'500ms': '500ms',
+		},
 		'weight': {
 			'400': '400',
 			'700': '700',
@@ -265,6 +271,7 @@ export default createConfig({
 		'outline-color': ['border-color'],
 		'outline-offset': ['grid'],
 		'outline-width': ['grid'],
+		'transition-duration': ['transition-duration'],
 	},
 	responsive: {
 		bp10: '@media (min-width: 640px)',
