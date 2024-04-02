@@ -4,16 +4,20 @@ import {
 } from '@remix-run/dev';
 import { defineConfig } from 'vite';
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
 	plugins: [remixCloudflareDevProxy(), remix()],
 	server: {
 		host: '127.0.0.1',
 	},
 	ssr: {
 		noExternal: [/^@keystatic\//, 'minimatch'],
-		target: 'webworker',
-		resolve: {
-			conditions: ['worker'],
-		},
+		...(mode === 'production' ?
+			{
+				target: 'webworker',
+				resolve: {
+					conditions: ['worker'],
+				},
+			}
+		:	{}),
 	},
-});
+}));
