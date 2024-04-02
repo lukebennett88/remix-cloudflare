@@ -13,7 +13,7 @@ export default defineConfig({
 		noExternal: [/^@keystatic\//, 'minimatch'],
 		target: 'webworker',
 		resolve: {
-			conditions: ['worker'],
+			conditions: ['react-server', 'worker'],
 		},
 	},
 });
