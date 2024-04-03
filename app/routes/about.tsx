@@ -1,4 +1,4 @@
-import { MetaFunction } from '@remix-run/cloudflare';
+import { json, MetaFunction } from '@remix-run/cloudflare';
 import { useLoaderData } from '@remix-run/react';
 
 import { DocumentRenderer } from '#app/components/document-renderer';
@@ -12,9 +12,9 @@ export const loader = async () => {
 		throw new Response('Not found', { status: 404 });
 	}
 
-	return {
+	return json({
 		document: await page.content(),
-	};
+	});
 };
 
 export const meta: MetaFunction = () => {

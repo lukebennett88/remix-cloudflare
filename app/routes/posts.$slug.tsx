@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs, MetaFunction } from '@remix-run/cloudflare';
+import { json, LoaderFunctionArgs, MetaFunction } from '@remix-run/cloudflare';
 import { useLoaderData } from '@remix-run/react';
 
 import { DocumentRenderer } from '#app/components/document-renderer';
@@ -22,11 +22,11 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 		throw new Response('Not found', { status: 404 });
 	}
 
-	return {
+	return json({
 		document: await post.content(),
 		publishedAt: post.publishedAt,
 		title: post.title,
-	};
+	});
 };
 
 export const meta: MetaFunction = () => {
