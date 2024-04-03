@@ -4,6 +4,7 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useLoaderData,
 	useLocation,
 } from '@remix-run/react';
 import { css } from '@tokenami/css';
@@ -15,7 +16,27 @@ import * as recipe from '#app/recipes';
 import '#app/reset.css';
 import '#app/tokenami.css';
 
+import { json, LoaderFunctionArgs, MetaFunction } from '@remix-run/cloudflare';
+
+import { ClientHintCheck, getHints } from './client-hints';
+import { useNonce } from './nonce-context';
+
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+	return json({
+		hints: getHints(request),
+	});
+};
+
+export const meta: MetaFunction<typeof loader> = () => {
+	return [
+		{ title: 'Luke Bennett' },
+		{ name: 'description', content: 'Design Engineer at Thinkmill' },
+	];
+};
+
 export function Layout({ children }: { children: React.ReactNode }) {
+	const { hints } = useLoaderData<typeof loader>();
+
 	const location = useLocation();
 	const isKeystaticRoute = location.pathname.startsWith('/keystatic');
 
@@ -53,6 +74,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 	return (
 		<html
+			data-theme={hints.theme}
 			lang="en"
 			style={css({
 				'--height': 'var(--size_full)',
@@ -70,6 +92,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				/> */}
 				<link href="/apple-touch-icon.png" rel="apple-touch-icon" />
 				<link href="/manifest.webmanifest" rel="manifest" />
+				<ClientHintCheck
+					// not sure if this is a good idea
+					nonce={useNonce()}
+				/>
 				<Meta />
 				<Links />
 			</head>

@@ -1,18 +1,7 @@
-import { type MetaFunction } from '@remix-run/cloudflare';
 import { css } from '@tokenami/css';
 
 import { Me } from '#app/components/me';
 import * as recipe from '#app/recipes';
-
-export const meta: MetaFunction = () => {
-	return [
-		{ title: 'Luke Bennett' },
-		{
-			name: 'description',
-			content: 'Design Engineer at Thinkmill',
-		},
-	];
-};
 
 export default function Index() {
 	return (

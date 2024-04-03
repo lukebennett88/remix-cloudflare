@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+
 /**
  * By default, Remix will handle generating the HTTP Response for you.
  *
@@ -6,22 +8,31 @@
  * @see https://remix.run/file-conventions/entry.server
  */
 
-import type { EntryContext } from '@remix-run/cloudflare';
+import { type HandleDocumentRequestFunction } from '@remix-run/cloudflare';
 import { RemixServer } from '@remix-run/react';
 import { isbot } from 'isbot';
 import { renderToReadableStream } from 'react-dom/server';
 
-export default async function handleRequest(
-	request: Request,
-	responseStatusCode: number,
-	responseHeaders: Headers,
-	remixContext: EntryContext,
-) {
+import { NonceProvider } from './nonce-context';
+
+type DocRequestArgs = Parameters<HandleDocumentRequestFunction>;
+
+export default async function handleRequest(...args: DocRequestArgs) {
+	let [
+		request,
+		responseStatusCode,
+		responseHeaders,
+		remixContext,
+		loadContext,
+	] = args;
+	const nonce = String(loadContext.cspNonce) ?? undefined;
 	const body = await renderToReadableStream(
-		<RemixServer context={remixContext} url={request.url} />,
+		<NonceProvider value={nonce}>
+			<RemixServer context={remixContext} url={request.url} />
+		</NonceProvider>,
 		{
 			signal: request.signal,
-			onError(error: unknown) {
+			onError(error) {
 				// Log streaming rendering errors from inside the shell
 				console.error(error);
 				responseStatusCode = 500;
