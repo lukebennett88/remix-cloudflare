@@ -17,12 +17,8 @@ export default function Index() {
 		>
 			<h1
 				style={css({
-					...recipe.typography({
-						size: '35',
-					}),
+					...recipe.typography({ size: '35' }),
 					'--font-weight': 'var(--weight_700)',
-					'--selection_background-color': 'var(--background-color_accent)',
-					'--selection_color': 'var(--text-color_accent-inverse)',
 				})}
 			>
 				Luke Bennett

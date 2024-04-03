@@ -47,14 +47,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<main
 					style={css({
 						...recipe.stack(),
-						'--flex': '1',
-						'--position': 'relative',
-						'--padding-block': 128,
-						'--padding-inline': 16,
+						'--background-color': 'var(--background-color_neutral)',
 						'--bp10_padding-inline': 20,
 						'--bp20_padding-inline': 24,
-						'--background-color': 'var(--background-color_neutral)',
 						'--color': 'var(--text-color_neutral)',
+						'--flex': '1',
+						'--padding-block': 128,
+						'--padding-inline': 16,
+						'--position': 'relative',
+						'--selection_background-color': 'var(--background-color_accent)',
+						'--selection_color': 'var(--text-color_accent-inverse)',
 					})}
 				>
 					<div
@@ -92,10 +94,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				/> */}
 				<link href="/apple-touch-icon.png" rel="apple-touch-icon" />
 				<link href="/manifest.webmanifest" rel="manifest" />
-				<ClientHintCheck
-					// not sure if this is a good idea
-					nonce={useNonce()}
-				/>
+				<ClientHintCheck nonce={useNonce()} />
 				<Meta />
 				<Links />
 			</head>
