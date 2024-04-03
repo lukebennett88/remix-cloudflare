@@ -17,14 +17,11 @@ export const loader = async () => {
 	});
 };
 
-export const meta: MetaFunction = () => {
-	return [
-		{ title: 'Luke Bennett' },
-		{
-			name: 'description',
-			content: 'Design Engineer at Thinkmill',
-		},
-	];
+export const meta: MetaFunction<typeof loader> = ({ matches }) => {
+	const parentMeta = matches
+		.flatMap((match) => match.meta ?? [])
+		.filter((meta) => !('title' in meta));
+	return [...parentMeta, { title: 'About: Luke Bennett' }];
 };
 
 export default function Page() {
