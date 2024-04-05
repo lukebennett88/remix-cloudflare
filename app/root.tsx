@@ -29,13 +29,13 @@ import {
 	MetaFunction,
 } from '@remix-run/cloudflare';
 
-import { ClientHintCheck, getHints, useHints } from './client-hints';
-import { LaptopIcon } from './components/icons/laptop';
-import { MoonIcon } from './components/icons/moon';
-import { SunIcon } from './components/icons/sun';
-import { useNonce } from './context/nonce-context';
-import { getTheme, setTheme, type Theme } from './theme.server';
-import { useRequestInfo } from './utils/request-info';
+import { ClientHintCheck, getHints, useHints } from '#app/client-hints';
+import { LaptopIcon } from '#app/components/icons/laptop';
+import { MoonIcon } from '#app/components/icons/moon';
+import { SunIcon } from '#app/components/icons/sun';
+import { useNonce } from '#app/context/nonce-context';
+import { getTheme, setTheme, type Theme } from '#app/theme.server';
+import { useRequestInfo } from '#app/utils/request-info';
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
 	return json({

@@ -13,7 +13,7 @@ import { RemixServer } from '@remix-run/react';
 import { isbot } from 'isbot';
 import { renderToReadableStream } from 'react-dom/server';
 
-import { NonceProvider } from './context/nonce-context';
+import { NonceProvider } from '#app/context/nonce-context';
 
 type DocRequestArgs = Parameters<HandleDocumentRequestFunction>;
 
