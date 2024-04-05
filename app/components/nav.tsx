@@ -72,13 +72,13 @@ function Nav({ justifyContent = 'start', links, ...consumerProps }: NavProps) {
 			style={css({
 				'--background-color': 'var(--background-color_neutral)',
 				'--bp10_padding-block': 20,
-				'--bp10_padding-inline': 20 + 16,
+				'--bp10_padding-inline': 20,
 				'--bp20_padding-block': 24,
-				'--bp20_padding-inline': 24 + 16,
+				'--bp20_padding-inline': 24,
 				'--color': 'var(--text-color_neutral)',
 				'--flex-shrink': 0,
 				'--padding-block': 16,
-				'--padding-inline': 16 + 16,
+				'--padding-inline': 16,
 				'--pointer-events': 'none',
 			})}
 		>

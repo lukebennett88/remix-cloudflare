@@ -1,3 +1,7 @@
+/**
+ * This file contains utilities for using client hints for user preference which
+ * are needed by the server, but are only known by the browser.
+ */
 import { getHintUtils } from '@epic-web/client-hints';
 import {
 	clientHint as colorSchemeHint,
@@ -6,10 +10,27 @@ import {
 import { useRevalidator } from '@remix-run/react';
 import * as React from 'react';
 
+import { useRequestInfo } from '#app/utils/request-info';
+
 const hintsUtils = getHintUtils({
 	theme: colorSchemeHint,
 });
 
+export const { getHints } = hintsUtils;
+
+/**
+ * @returns an object with the client hints and their values
+ */
+export function useHints() {
+	const requestInfo = useRequestInfo();
+	return requestInfo.hints;
+}
+
+/**
+ * @returns inline script element that checks for client hints and sets cookies
+ * if they are not set then reloads the page if any cookie was set to an
+ * inaccurate value.
+ */
 export function ClientHintCheck({ nonce }: { nonce: string }) {
 	const { revalidate } = useRevalidator();
 	React.useEffect(
@@ -26,5 +47,3 @@ export function ClientHintCheck({ nonce }: { nonce: string }) {
 		/>
 	);
 }
-
-export const { getHints } = hintsUtils;

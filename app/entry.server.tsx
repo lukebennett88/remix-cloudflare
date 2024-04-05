@@ -13,7 +13,7 @@ import { RemixServer } from '@remix-run/react';
 import { isbot } from 'isbot';
 import { renderToReadableStream } from 'react-dom/server';
 
-import { NonceProvider } from './nonce-context';
+import { NonceProvider } from '#app/context/nonce-context';
 
 type DocRequestArgs = Parameters<HandleDocumentRequestFunction>;
 
@@ -25,7 +25,7 @@ export default async function handleRequest(...args: DocRequestArgs) {
 		remixContext,
 		loadContext,
 	] = args;
-	const nonce = String(loadContext.cspNonce) ?? undefined;
+	const nonce = String(loadContext.cspNonce ?? '') ?? undefined;
 	const body = await renderToReadableStream(
 		<NonceProvider value={nonce}>
 			<RemixServer context={remixContext} url={request.url} />

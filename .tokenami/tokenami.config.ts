@@ -184,6 +184,10 @@ function createTheme(mode: 'light' | 'dark') {
 			'out': 'cubic-bezier(0, 0, 0.2, 1)',
 			'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
 		},
+		'flex-grow': {
+			'0': '0',
+			'1': '1',
+		},
 		'font-family': {
 			sans: "'Helvetica Neue', Helvetica, Inter, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif",
 			mono: "ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace",
@@ -259,6 +263,7 @@ export default createConfig({
 		'border-inline-start-color': ['border-color'],
 		'color': ['text-color'],
 		'fill': ['background-color', 'border-color', 'text-color'],
+		'flex-grow': ['flex-grow'],
 		'font-family': ['font-family'],
 		'inline-size': ['grid', 'size'],
 		'margin': ['grid', 'size'],
@@ -281,7 +286,12 @@ export default createConfig({
 		bp50: '@media (min-width: 1536px)',
 		bp60: '@media (min-width: 1920px)',
 	},
-	themeSelector: (mode) => `[data-theme=${mode}]`,
+	themeSelector: (mode) => {
+		if (mode === 'light') {
+			return ':root';
+		}
+		return `[data-theme=${mode}]`;
+	},
 	selectors: {
 		...defaultConfig['selectors'],
 		selection: '&::selection',

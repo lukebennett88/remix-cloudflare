@@ -44,7 +44,7 @@ export function track({
 			'--align-items': verticalAlignMap[verticalAlign],
 		}),
 		center: css({
-			'--flex-grow': 1,
+			'--flex-grow': 'var(--flex-grow_1)',
 			'--min-width': 0,
 		}),
 		rail: css({
