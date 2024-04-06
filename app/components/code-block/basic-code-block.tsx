@@ -10,9 +10,6 @@ export const codeBlockStyles = css({
 	'--overflow': 'auto',
 	'--padding': 16,
 	'--tab-size': 2,
-	'--transition-duration': 'var(--transition-duration_150ms)',
-	'--transition-property': 'all',
-	'--transition-timing-function': 'var(--ease_in)',
 });
 
 export function BasicCodeBlock({ children }: { children: string }) {
