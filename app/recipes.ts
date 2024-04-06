@@ -135,15 +135,27 @@ function prefixStylesForBreakpoint(
 }
 
 export type TypographyArgs = {
+	capsize?: boolean;
 	size?:
 		| keyof typeof typographyMap
 		| Partial<Record<'base' | Breakpoint, keyof typeof typographyMap>>;
 };
 
-export function typography({ size = '16' }: TypographyArgs = {}) {
-	let styles = {};
+export function typography({
+	capsize = true,
+	size = '16',
+}: TypographyArgs = {}) {
+	let styles: TokenamiProperties = {};
 	if (typeof size === 'string') {
 		styles = { ...typographyMap[size] };
+		if (!capsize) {
+			delete styles['--after_content'];
+			delete styles['--after_display'];
+			delete styles['--after_margin-block-start'];
+			delete styles['--before_content'];
+			delete styles['--before_display'];
+			delete styles['--before_margin-block-start'];
+		}
 	} else {
 		// Ensure base styles are set first if specified.
 		if (size.base) {
@@ -159,6 +171,17 @@ export function typography({ size = '16' }: TypographyArgs = {}) {
 				styles = { ...styles, ...bpStyles };
 			}
 		});
+
+		if (!capsize) {
+			breakpoints.forEach((bp) => {
+				delete styles[`--${bp}_after_content`];
+				delete styles[`--${bp}_after_display`];
+				delete styles[`--${bp}_after_margin-block-start`];
+				delete styles[`--${bp}_before_content`];
+				delete styles[`--${bp}_before_display`];
+				delete styles[`--${bp}_before_margin-block-start`];
+			});
+		}
 	}
 
 	return css(styles);
