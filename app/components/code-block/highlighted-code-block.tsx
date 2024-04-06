@@ -4,6 +4,7 @@ import cssLang from 'shiki/langs/css.mjs';
 import javascriptLang from 'shiki/langs/javascript.mjs';
 import jsonLang from 'shiki/langs/json.mjs';
 import markdownLang from 'shiki/langs/markdown.mjs';
+import tsxLang from 'shiki/langs/tsx.mjs';
 import typescriptLang from 'shiki/langs/typescript.mjs';
 import nightOwl from 'shiki/themes/night-owl.mjs';
 import getWasm from 'shiki/wasm';
@@ -12,7 +13,14 @@ import { BasicCodeBlock, codeBlockStyles } from './basic-code-block';
 
 export async function getHighligher() {
 	return await getHighlighterCore({
-		langs: [cssLang, javascriptLang, jsonLang, markdownLang, typescriptLang],
+		langs: [
+			cssLang,
+			javascriptLang,
+			jsonLang,
+			markdownLang,
+			tsxLang,
+			typescriptLang,
+		],
 		loadWasm: getWasm,
 		themes: [nightOwl],
 	});
@@ -23,6 +31,7 @@ const highlightableLangs = [
 	'javascript',
 	'json',
 	'markdown',
+	'tsx',
 	'typescript',
 ] as const;
 
