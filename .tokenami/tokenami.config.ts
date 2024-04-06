@@ -276,6 +276,7 @@ export default createConfig({
 		'outline-color': ['border-color'],
 		'outline-offset': ['grid'],
 		'outline-width': ['grid'],
+		'text-decoration-color': ['text-color'],
 		'transition-duration': ['transition-duration'],
 	},
 	responsive: {
