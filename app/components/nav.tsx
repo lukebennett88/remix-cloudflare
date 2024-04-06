@@ -122,7 +122,15 @@ function Nav({ justifyContent = 'start', links, ...consumerProps }: NavProps) {
 									>
 										{label}
 									</span>
-									{isExternal && <ExternalLinkIcon style={css({ ...rail })} />}
+									{isExternal && (
+										<ExternalLinkIcon
+											style={css({
+												...rail,
+												'--block-size': 'var(---,0.75em)',
+												'--inline-size': 'var(---,0.75em)',
+											})}
+										/>
+									)}
 								</NavLink>
 							</li>
 						);

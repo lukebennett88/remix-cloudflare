@@ -3,6 +3,7 @@ import { css } from '@tokenami/css';
 
 import * as recipe from '#app/recipes';
 
+import { AlignChildToText } from './align-child-to-text';
 import { ExternalLinkIcon } from './external-link-icon';
 
 export interface LinkProps extends recipe.LinkArgs {
@@ -11,18 +12,25 @@ export interface LinkProps extends recipe.LinkArgs {
 }
 
 export function Link({ children, href, tone = 'accent' }: LinkProps) {
-	const { root, center, rail } = recipe.track({ isInline: true });
 	const isExternal = href.startsWith('http');
 	return (
 		<RemixLink
 			style={css({
 				...recipe.link({ tone }),
-				...root,
 			})}
 			to={href}
 		>
-			<span style={css({ ...center })}>{children}</span>
-			{isExternal && <ExternalLinkIcon style={css({ ...rail })} />}
+			{children}&nbsp;
+			{isExternal && (
+				<AlignChildToText>
+					<ExternalLinkIcon
+						style={css({
+							'--block-size': 'var(---,0.75em)',
+							'--inline-size': 'var(---,0.75em)',
+						})}
+					/>
+				</AlignChildToText>
+			)}
 		</RemixLink>
 	);
 }
