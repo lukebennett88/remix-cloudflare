@@ -5,11 +5,12 @@ import {
 } from '@keystatic/core/renderer';
 import { css } from '@tokenami/css';
 
+import { CloudImage } from '#app/components/cloud-image';
+import { CodeBlock } from '#app/components/code-block';
+import { Heading } from '#app/components/heading';
+import { Link } from '#app/components/link';
+
 import { componentBlocks as editorComponentBlocks } from '../../keystatic.config';
-import { CodeBlock } from '../code-block';
-import { CloudImage } from './cloud-image';
-import { Heading } from './heading';
-import { Link } from './link';
 
 interface DocumentRendererProps extends KeystaticDocumentRendererProps {}
 
