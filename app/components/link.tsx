@@ -1,5 +1,6 @@
 import { Link as RemixLink } from '@remix-run/react';
 import { css } from '@tokenami/css';
+import { Fragment } from 'react/jsx-runtime';
 
 import * as recipe from '#app/recipes';
 
@@ -20,16 +21,19 @@ export function Link({ children, href, tone = 'accent' }: LinkProps) {
 			})}
 			to={href}
 		>
-			{children}&nbsp;
+			{children}
 			{isExternal && (
-				<AlignChildToText>
-					<ExternalLinkIcon
-						style={css({
-							'--block-size': 'var(---,0.75em)',
-							'--inline-size': 'var(---,0.75em)',
-						})}
-					/>
-				</AlignChildToText>
+				<Fragment>
+					&nbsp;
+					<AlignChildToText>
+						<ExternalLinkIcon
+							style={css({
+								'--block-size': 'var(---,0.75em)',
+								'--inline-size': 'var(---,0.75em)',
+							})}
+						/>
+					</AlignChildToText>
+				</Fragment>
 			)}
 		</RemixLink>
 	);
