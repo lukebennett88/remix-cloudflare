@@ -270,7 +270,13 @@ function ThemeSwitch({ userPreference }: { userPreference?: Theme | null }) {
 					})}
 					type="submit"
 				>
-					<Icon aria-label={currentTheme.label} />
+					<Icon
+						aria-label={currentTheme.label}
+						style={css({
+							'--block-size': 'var(--size_full)',
+							'--inline-size': 'var(--size_full)',
+						})}
+					/>
 				</button>
 			</div>
 		</fetcher.Form>
