@@ -9,6 +9,7 @@ import { CloudImage } from '#app/components/cloud-image';
 import { CodeBlock } from '#app/components/code-block';
 import { Heading } from '#app/components/heading';
 import { Link } from '#app/components/link';
+import * as recipe from '#app/recipes';
 
 import { componentBlocks as editorComponentBlocks } from '../../keystatic.config';
 
@@ -44,7 +45,10 @@ const renderers = {
 			return (
 				<code
 					style={css({
+						...recipe.typography({ size: '14' }),
+						'--display': 'inline-block',
 						'--font-family': 'var(--font-family_mono)',
+						'--font-weight': 'var(--weight_700)',
 					})}
 				>
 					{props.children}
