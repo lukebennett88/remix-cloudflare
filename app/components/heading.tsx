@@ -2,13 +2,11 @@ import { css } from '@tokenami/css';
 
 import * as recipe from '#app/recipes';
 
-export function Heading({
-	children,
-	level,
-}: {
-	children: React.ReactNode;
+interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
 	level: 1 | 2 | 3 | 4 | 5 | 6;
-}) {
+}
+
+export function Heading({ children, level }: HeadingProps) {
 	const Tag = `h${level}` as const;
 	const sizeMap = {
 		'1': '35',
