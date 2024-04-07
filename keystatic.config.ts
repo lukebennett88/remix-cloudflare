@@ -27,6 +27,35 @@ export default config({
 			{ kind: 'cloud' }
 		:	{ kind: 'local' },
 	collections: {
+		links: collection({
+			label: 'Links',
+			entryLayout: 'content',
+			format: {
+				contentField: 'content',
+			},
+			path: 'content/links/*',
+			slugField: 'title',
+			schema: {
+				title: fields.slug({
+					name: {
+						label: 'Title',
+					},
+				}),
+				publishedAt: fields.date({
+					label: 'Published at',
+					validation: {
+						isRequired: true,
+					},
+				}),
+				linkedUrl: fields.url({
+					label: 'Linked URL',
+					validation: {
+						isRequired: true,
+					},
+				}),
+				content,
+			},
+		}),
 		posts: collection({
 			label: 'Posts',
 			entryLayout: 'content',
