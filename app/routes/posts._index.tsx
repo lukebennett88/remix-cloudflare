@@ -1,5 +1,5 @@
 import { json, MetaFunction } from '@remix-run/cloudflare';
-import { useLoaderData } from '@remix-run/react';
+import { Link, useLoaderData } from '@remix-run/react';
 import { css } from '@tokenami/css';
 
 import { reader } from '#app/reader.server.js';
@@ -32,6 +32,8 @@ export const meta: MetaFunction = () => {
 	];
 };
 
+const { root, center, rail } = recipe.track();
+
 export default function Page() {
 	const { posts } = useLoaderData<typeof loader>();
 
@@ -44,49 +46,73 @@ export default function Page() {
 				aria-labelledby="posts"
 				style={css({
 					...recipe.stack(),
-					'--gap': 16,
 				})}
 			>
-				{posts.map(({ slug, entry }) => (
-					<li
-						key={slug}
-						style={css(
-							entry.isDraft ?
-								{
-									'--outline-color': 'var(--border-color_accent)',
-									'--outline-offset': 2,
-									'--outline-style': 'dashed',
-									'--outline-width': 2,
-								}
-							:	{},
-						)}
-						// className={cn(
-						// 	'prose dark:prose-invert break-words bg-white p-4 shadow sm:rounded-xl dark:bg-gray-800',
-						// 	entry.isDraft && 'border-2 border-dashed border-yellow-500',
-						// )}
-					>
-						<a
-							href={`/posts/${slug}`}
-							style={css({
-								...recipe.link({ tone: 'accent' }),
-								'--display': 'inline-block',
-							})}
-						>
-							<h2
-								style={css({
-									...recipe.typography({ size: '18' }),
-								})}
-							>
-								{entry.title}
-							</h2>
-						</a>
-						<br />
-						<time className="text-sm" dateTime={entry.publishedAt}>
-							{entry.publishedAt}
-						</time>
-					</li>
+				{posts.map((post) => (
+					<Post key={post.slug} {...post} />
 				))}
 			</ul>
 		</Layout>
+	);
+}
+
+interface PostProps {
+	slug: string;
+	entry: {
+		title: string;
+		publishedAt: string;
+		isDraft: boolean;
+	};
+}
+
+function Post({ entry, slug }: PostProps) {
+	return (
+		<li
+			style={css({
+				'--border-block-end-color': 'var(--border-color_neutral)',
+				'--border-block-end-style': 'var(---,solid)',
+				'--border-block-end-width': '1px',
+				'--last-child_border-width': 0,
+				'--padding-block': 16,
+			})}
+		>
+			<article
+				style={css({
+					'--align-items': 'baseline',
+					'--display': 'flex',
+					'--gap': 8,
+					'--justify-content': 'space-between',
+					...root,
+				})}
+			>
+				<Link
+					style={css({
+						...recipe.link({ tone: 'accent' }),
+						...center,
+						'--flex-grow': 'var(--flex-grow_0)',
+						'--text-decoration-style': entry.isDraft ? 'dashed' : 'solid',
+					})}
+					to={`/posts/${slug}`}
+				>
+					<h2
+						style={css({
+							...recipe.typography({ size: '18' }),
+							'--font-weight': 'var(--weight_700)',
+						})}
+					>
+						{entry.title}
+					</h2>
+				</Link>
+				<time
+					dateTime={entry.publishedAt}
+					style={css({
+						...recipe.typography({ size: '14' }),
+						...rail,
+					})}
+				>
+					{entry.publishedAt}
+				</time>
+			</article>
+		</li>
 	);
 }
