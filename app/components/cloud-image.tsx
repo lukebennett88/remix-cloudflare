@@ -150,11 +150,9 @@ export function CloudImage({
 					'--aspect-ratio':
 						width && height ? `${(width / height).toFixed(2)}` : 'auto',
 					'--background-color': 'var(--background-color_neutral)',
-					'--max-block-size': height ?? 'var(--size_full)',
-					'--max-inline-size':
-						width ? Math.min(width, maxWidth) : 'var(--size_full)',
+					'--inline-size': width ?? undefined,
+					'--max-inline-size': 'var(--size_full)',
 					'--object-fit': 'cover',
-					'--block-size': 'var(--size_full)',
 				},
 				style,
 			)}
