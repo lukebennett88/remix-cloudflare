@@ -8,6 +8,8 @@ export function AlignChildToText({ children }: { children: React.ReactNode }) {
 			style={css({
 				'--align-items': 'center',
 				'--display': 'inline-flex',
+				'--flex-shrink': 0,
+				'--min-inline-size': 0,
 			})}
 		>
 			<ZeroWidthSpace />

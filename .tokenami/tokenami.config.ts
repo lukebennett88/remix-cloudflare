@@ -189,7 +189,7 @@ function createTheme(mode: 'light' | 'dark') {
 			'1': '1',
 		},
 		'font-family': {
-			sans: "'Helvetica Neue', Helvetica, Inter, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif",
+			sans: "'Helvetica Neue', Helvetica, Inter, ui-sans-serif, system-ui, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif",
 			mono: "ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace",
 		},
 		'font-size': {
