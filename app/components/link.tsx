@@ -11,28 +11,30 @@ import { AlignChildToText } from './align-child-to-text';
 import { ExternalLinkIcon } from './external-link-icon';
 
 export interface LinkProps
-	extends TokenamiStyle<RemixLinkProps>,
+	extends Omit<TokenamiStyle<RemixLinkProps>, 'to'>,
 		recipe.LinkArgs {
 	children: React.ReactNode;
+	href: string;
 }
 
 export function Link({
 	children,
-	to,
+	href,
 	tone = 'accent',
 	style,
 	...consumerProps
 }: LinkProps) {
-	const isExternal = typeof to === 'string' && to.startsWith('http');
+	const isExternal = typeof href === 'string' && href.startsWith('http');
 	return (
 		<RemixLink
 			style={css(
 				{
 					...recipe.link({ tone }),
+					'--text-wrap': 'pretty',
 				},
 				style,
 			)}
-			to={to}
+			to={href}
 			{...consumerProps}
 		>
 			{children}
