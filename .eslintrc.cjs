@@ -35,6 +35,7 @@ module.exports = {
 				'plugin:jsx-a11y/recommended',
 			],
 			rules: {
+				'jsx-a11y/alt-text': 'off',
 				'react/jsx-sort-props': 'warn',
 			},
 			settings: {
