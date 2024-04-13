@@ -1,24 +1,55 @@
-import { json, MetaFunction } from '@remix-run/cloudflare';
-import { Link, useLoaderData } from '@remix-run/react';
+import {
+	json,
+	type MetaFunction,
+	type SerializeFrom,
+} from '@remix-run/cloudflare';
+import { useLoaderData } from '@remix-run/react';
 import { css } from '@tokenami/css';
 
 import { reader } from '#app/reader.server.js';
 import * as recipe from '#app/recipes';
 
+import { AlignChildToText } from '../components/align-child-to-text';
+import { DocumentRenderer } from '../components/document-renderer';
 import { Heading } from '../components/heading';
 import { Layout } from '../components/layout';
+import { Link } from '../components/link';
 
 export const loader = async () => {
-	const posts = (await reader.collections.posts.all())
-		.filter((post) => (import.meta.env.PROD ? !post.entry.isDraft : true))
-		.sort(
+	const [linkPosts, blogPosts] = await Promise.all([
+		Promise.all(
+			(await reader.collections.links.all()).map(async (post) => ({
+				type: 'link' as const,
+				...post,
+				entry: {
+					...post.entry,
+					content: await post.entry.content(),
+				},
+			})),
+		),
+		Promise.all(
+			(await reader.collections.posts.all())
+				.map((post) => ({
+					type: 'post' as const,
+					...post,
+				}))
+				.filter((post) => (import.meta.env.PROD ? !post.entry.isDraft : true))
+				.map(async (post) => ({
+					...post,
+					entry: {
+						...post.entry,
+						content: await post.entry.content(),
+					},
+				})),
+		),
+	]);
+
+	return json({
+		posts: [...linkPosts, ...blogPosts].sort(
 			(a, b) =>
 				new Date(b.entry.publishedAt).getTime() -
 				new Date(a.entry.publishedAt).getTime(),
-		);
-
-	return json({
-		posts,
+		),
 	});
 };
 
@@ -32,7 +63,9 @@ export const meta: MetaFunction = () => {
 	];
 };
 
-const { root, center, rail } = recipe.track();
+const { root, center, rail } = recipe.track({
+	verticalAlign: 'start',
+});
 
 export default function Page() {
 	const { posts } = useLoaderData<typeof loader>();
@@ -56,16 +89,10 @@ export default function Page() {
 	);
 }
 
-interface PostProps {
-	slug: string;
-	entry: {
-		title: string;
-		publishedAt: string;
-		isDraft: boolean;
-	};
-}
+type PostProps = SerializeFrom<typeof loader>['posts'][number];
 
-function Post({ entry, slug }: PostProps) {
+function Post({ entry, slug, type }: PostProps) {
+	const isLinkPost = type === 'link';
 	return (
 		<li
 			style={css({
@@ -73,45 +100,70 @@ function Post({ entry, slug }: PostProps) {
 				'--border-block-end-style': 'var(---,solid)',
 				'--border-block-end-width': '1px',
 				'--last-child_border-width': 0,
-				'--padding-block': 16,
+				'--padding-block': 48,
 			})}
 		>
 			<article
 				style={css({
-					'--align-items': 'baseline',
-					'--display': 'flex',
-					'--gap': 8,
-					'--justify-content': 'space-between',
-					...root,
+					...recipe.stack(),
+					'--gap': 12,
 				})}
 			>
-				<Link
+				<div
 					style={css({
-						...recipe.link({ tone: 'accent' }),
-						...center,
-						'--flex-grow': 'var(--flex-grow_0)',
-						'--text-decoration-style': entry.isDraft ? 'dashed' : 'solid',
+						...recipe.typography({
+							capsize: false,
+							size: '18',
+						}),
+						...root,
+						'--gap': 24,
+						'--justify-content': 'space-between',
 					})}
-					to={`/posts/${slug}`}
 				>
-					<h2
+					<div
 						style={css({
-							...recipe.typography({ size: '18' }),
-							'--font-weight': 'var(--weight_700)',
+							...center,
+							'--flex-grow': 'var(--flex-grow_0)',
 						})}
 					>
-						{entry.title}
-					</h2>
-				</Link>
-				<time
-					dateTime={entry.publishedAt}
+						<Link
+							href={isLinkPost ? entry.linkedUrl : `/posts/${slug}`}
+							style={css({
+								'--text-decoration-style':
+									!isLinkPost && entry.isDraft ? 'dashed' : 'solid',
+							})}
+							tone="accent"
+						>
+							<Heading
+								level={2}
+								style={css({
+									'--color': 'var(--text-color_accent)',
+								})}
+							>
+								{entry.title}
+							</Heading>
+						</Link>
+					</div>
+					<AlignChildToText>
+						<time
+							dateTime={entry.publishedAt}
+							style={css({
+								...rail,
+								...recipe.typography({ size: '16' }),
+								'--font-variant-numeric': 'tabular-nums',
+							})}
+						>
+							{entry.publishedAt}
+						</time>
+					</AlignChildToText>
+				</div>
+				<div
 					style={css({
-						...recipe.typography({ size: '14' }),
-						...rail,
+						'--inline-size': 'var(--size_full)',
 					})}
 				>
-					{entry.publishedAt}
-				</time>
+					{isLinkPost && <DocumentRenderer document={entry.content as any} />}
+				</div>
 			</article>
 		</li>
 	);

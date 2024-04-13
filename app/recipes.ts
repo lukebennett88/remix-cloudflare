@@ -322,3 +322,14 @@ export function container({ size }: ContainerArgs) {
 		'--inline-size': 'var(--size_full)',
 	});
 }
+
+// Vertical Rhythm -------------------------------------------------------------
+
+export function verticalRhythm() {
+	return css({
+		'--margin-block-start': 'var(---,1.5em)',
+		'--margin-block-end': 'var(---,0.75em)',
+		'--first-child_margin-block-start': 0,
+		'--last-child_margin-block-end': 0,
+	});
+}

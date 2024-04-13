@@ -1,4 +1,11 @@
-import { orangeP3, sageDarkP3, sandP3, tealDarkP3 } from '@radix-ui/colors';
+import {
+	blackP3A,
+	orangeP3,
+	sageDarkP3,
+	sandP3,
+	sandP3A,
+	tealDarkP3,
+} from '@radix-ui/colors';
 import { createConfig, defaultConfig } from '@tokenami/css';
 
 export const light = {
@@ -189,7 +196,7 @@ function createTheme(mode: 'light' | 'dark') {
 			'1': '1',
 		},
 		'font-family': {
-			sans: "'Helvetica Neue', Helvetica, Inter, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif",
+			sans: "'Helvetica Neue', Helvetica, Inter, ui-sans-serif, system-ui, Roboto, 'Arial Nova', 'Nimbus Sans', Arial, sans-serif",
 			mono: "ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace",
 		},
 		'font-size': {
@@ -211,7 +218,42 @@ function createTheme(mode: 'light' | 'dark') {
 			'auto': 'auto',
 			'full': '100%',
 		},
-		'shadow': {},
+		'shadow': {
+			'10': `
+				inset 0 0 0 1px ${sandP3A.sandA5},
+				inset 0 1.5px 2px 0 ${sandP3A.sandA2},
+				inset 0 1.5px 2px 0 ${blackP3A.blackA2}
+			`,
+			'20': `
+				0 0 0 1px ${sandP3A.sandA3},
+				0 0 0 0.5px ${blackP3A.blackA1},
+				0 1px 1px 0 ${sandP3A.sandA2},
+				0 2px 1px -1px ${blackP3A.blackA1},
+				0 1px 3px 0 ${blackP3A.blackA1}
+			`,
+			'30': `
+				0 0 0 1px ${sandP3A.sandA3},
+				0 2px 3px -2px ${sandP3A.sandA3},
+				0 3px 12px -4px ${blackP3A.blackA2},
+				0 4px 16px -8px ${blackP3A.blackA2}
+			`,
+			'40': `
+				0 0 0 1px ${sandP3A.sandA3},
+				0 8px 40px ${blackP3A.blackA1},
+				0 12px 32px -16px ${sandP3A.sandA3}
+			`,
+			'50': `
+				0 0 0 1px ${sandP3A.sandA3},
+				0 12px 60px ${blackP3A.blackA3},
+				0 12px 32px -16px ${sandP3A.sandA5}
+			`,
+			'60': `
+				0 0 0 1px ${sandP3A.sandA3},
+				0 12px 60px ${blackP3A.blackA3},
+				0 16px 64px ${sandP3A.sandA2},
+				0 16px 36px -20px ${sandP3A.sandA7}
+			`,
+		},
 		'text-color': {
 			...modes[mode]['text-color'],
 		},

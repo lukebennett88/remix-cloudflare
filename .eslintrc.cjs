@@ -35,46 +35,45 @@ module.exports = {
 				'plugin:jsx-a11y/recommended',
 			],
 			rules: {
+				'jsx-a11y/alt-text': 'off',
 				'react/jsx-sort-props': 'warn',
 			},
 			settings: {
-				'react': {
+				react: {
 					version: 'detect',
 				},
-				'formComponents': ['Form'],
-				'linkComponents': [
+				formComponents: ['Form'],
+				linkComponents: [
 					{ name: 'Link', linkAttribute: 'to' },
 					{ name: 'NavLink', linkAttribute: 'to' },
 				],
-				'import/resolver': {
-					typescript: {},
-				},
 			},
 		},
 
 		// Typescript
 		{
 			files: ['**/*.{ts,tsx}'],
-			plugins: ['@typescript-eslint', 'import'],
+			plugins: ['@typescript-eslint'],
 			parser: '@typescript-eslint/parser',
-			settings: {
-				'import/internal-regex': '^#app/',
-				'import/resolver': {
-					node: {
-						extensions: ['.ts', '.tsx'],
-					},
-					typescript: {
-						alwaysTryTypes: true,
-					},
-				},
-			},
-			extends: [
-				'plugin:@typescript-eslint/recommended',
-				'plugin:import/recommended',
-				'plugin:import/typescript',
-			],
+			settings: {},
+			extends: ['plugin:@typescript-eslint/recommended'],
 			rules: {
+				'@typescript-eslint/ban-ts-comment': 'off',
+				'@typescript-eslint/consistent-type-imports': [
+					'warn',
+					{ prefer: 'type-imports', fixStyle: 'inline-type-imports' },
+				],
+				'@typescript-eslint/no-empty-function': 'off',
 				'@typescript-eslint/no-explicit-any': 'off',
+				'@typescript-eslint/no-non-null-assertion': 'warn',
+				'@typescript-eslint/no-unused-vars': [
+					'warn',
+					{
+						argsIgnorePattern: '^_',
+						caughtErrorsIgnorePattern: '^_',
+						varsIgnorePattern: '^_',
+					},
+				],
 			},
 		},
 

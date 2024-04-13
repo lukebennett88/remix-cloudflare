@@ -3,7 +3,7 @@ import { css } from '@tokenami/css';
 
 import * as recipe from '#app/recipes';
 
-import { ExternalLinkIcon } from './external-link-icon';
+import { ExternalLinkIcon } from './icons/external-link';
 
 export function InternalNav() {
 	return (
@@ -41,6 +41,10 @@ export function ExternalNav() {
 				{
 					href: 'https://mastodon.social/@luke_bennett_',
 					label: 'Mastodon',
+				},
+				{
+					href: 'https://bsky.app/profile/lukebennett.com.au',
+					label: 'Bluesky',
 				},
 				{
 					href: 'https://twitter.com/luke_bennett_',
@@ -94,6 +98,7 @@ function Nav({ justifyContent = 'start', links, ...consumerProps }: NavProps) {
 				<ul
 					style={css({
 						'--display': 'flex',
+						'--flex-wrap': 'wrap',
 						'--gap': 8,
 						'--margin-block-start': 'var(--size_auto)',
 						'--pointer-events': 'auto',

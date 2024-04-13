@@ -1,4 +1,4 @@
-import { json, MetaFunction } from '@remix-run/cloudflare';
+import { json, type MetaFunction } from '@remix-run/cloudflare';
 import { useLoaderData } from '@remix-run/react';
 
 import { DocumentRenderer } from '#app/components/document-renderer';
