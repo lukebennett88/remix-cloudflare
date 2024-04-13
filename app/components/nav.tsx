@@ -3,7 +3,7 @@ import { css } from '@tokenami/css';
 
 import * as recipe from '#app/recipes';
 
-import { ExternalLinkIcon } from './external-link-icon';
+import { ExternalLinkIcon } from './icons/external-link';
 
 export function InternalNav() {
 	return (

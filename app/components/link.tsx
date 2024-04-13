@@ -6,6 +6,8 @@ import { css, type TokenamiStyle } from '@tokenami/css';
 
 import * as recipe from '#app/recipes';
 
+import { ExternalLinkIcon } from './icons/external-link';
+
 export interface LinkProps
 	extends Omit<TokenamiStyle<RemixLinkProps>, 'to'>,
 		recipe.LinkArgs {
@@ -27,9 +29,6 @@ export function Link({
 				{
 					...recipe.link({ tone }),
 					'--text-wrap': 'pretty',
-					...(isExternal && {
-						'--after_content': "'↝'",
-					}),
 				},
 				style,
 			)}
@@ -37,7 +36,19 @@ export function Link({
 			{...consumerProps}
 		>
 			{children}
-			{isExternal && <>&nbsp;</>}
+			{isExternal && (
+				<>
+					&nbsp;
+					<ExternalLinkIcon
+						style={css({
+							'--block-size': 'var(---,0.875em)',
+							'--display': 'inline',
+							'--inline-size': 'var(---,0.875em)',
+							'--vertical-align': 'baseline',
+						})}
+					/>
+				</>
+			)}
 		</RemixLink>
 	);
 }
