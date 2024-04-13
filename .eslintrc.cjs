@@ -59,7 +59,21 @@ module.exports = {
 			extends: ['plugin:@typescript-eslint/recommended'],
 			rules: {
 				'@typescript-eslint/ban-ts-comment': 'off',
+				'@typescript-eslint/consistent-type-imports': [
+					'warn',
+					{ prefer: 'type-imports', fixStyle: 'inline-type-imports' },
+				],
+				'@typescript-eslint/no-empty-function': 'off',
 				'@typescript-eslint/no-explicit-any': 'off',
+				'@typescript-eslint/no-non-null-assertion': 'warn',
+				'@typescript-eslint/no-unused-vars': [
+					'warn',
+					{
+						argsIgnorePattern: '^_',
+						caughtErrorsIgnorePattern: '^_',
+						varsIgnorePattern: '^_',
+					},
+				],
 			},
 		},
 

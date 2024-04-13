@@ -22,6 +22,7 @@
 		"fix:format": "pnpm run format --write",
 		"fix:lint": "pnpm run lint --fix",
 		"format": "prettier . --cache",
+		"preinstall": "npx only-allow pnpm",
 		"lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
 		"start": "wrangler pages dev ./build/client",
 		"tokenami": "tokenami --output app/tokenami.css",
