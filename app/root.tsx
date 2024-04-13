@@ -13,6 +13,16 @@ import {
 import { css } from '@tokenami/css';
 import { assert } from 'emery/assertions';
 import * as React from 'react';
+import {
+	Button,
+	Label,
+	ListBox,
+	ListBoxItem,
+	Popover,
+	Select,
+	SelectValue,
+	type Key,
+} from 'react-aria-components';
 import { z } from 'zod';
 
 import { ExternalNav, InternalNav } from '#app/components/nav';
@@ -222,7 +232,6 @@ export function useOptimisticThemeMode() {
 
 function ThemeSwitch({ userPreference }: { userPreference?: Theme | null }) {
 	const fetcher = useFetcher<typeof action>();
-
 	const [form] = useForm({
 		id: 'theme-switch',
 		lastResult: fetcher.data?.result,
@@ -230,10 +239,6 @@ function ThemeSwitch({ userPreference }: { userPreference?: Theme | null }) {
 
 	const optimisticMode = useOptimisticThemeMode();
 	const mode = optimisticMode ?? userPreference ?? 'system';
-	const nextMode =
-		mode === 'system' ? 'light'
-		: mode === 'light' ? 'dark'
-		: 'system';
 
 	const modeIcon = {
 		light: { icon: SunIcon, label: 'Light theme' },
@@ -241,14 +246,23 @@ function ThemeSwitch({ userPreference }: { userPreference?: Theme | null }) {
 		system: { icon: LaptopIcon, label: 'System theme' },
 	};
 
-	const currentTheme = modeIcon[mode];
-
-	const Icon = currentTheme.icon;
+	const options = [
+		{ key: 'system', label: 'System', icon: LaptopIcon },
+		{ key: 'light', label: 'Light', icon: SunIcon },
+		{ key: 'dark', label: 'Dark', icon: MoonIcon },
+	];
+	const [theme, setTheme] = React.useState(mode);
 
 	return (
 		<fetcher.Form method="POST" {...getFormProps(form)}>
-			<input name="theme" type="hidden" value={nextMode} />
-			<div
+			<Select
+				defaultSelectedKey={theme}
+				name="theme"
+				onSelectionChange={(key: Key) => {
+					setTheme(key as Theme);
+					fetcher.submit({ theme: key }, { method: 'post' });
+				}}
+				selectedKey={theme}
 				style={css({
 					'--bp10_padding-inline': 20,
 					'--bp20_padding-inline': 24,
@@ -257,28 +271,67 @@ function ThemeSwitch({ userPreference }: { userPreference?: Theme | null }) {
 					'--padding-inline': 16,
 				})}
 			>
-				<button
+				<Label style={css(recipe.visuallyHidden())}>Theme</Label>
+				<Button
 					style={css({
 						...recipe.focusRing(),
+						'--background-color': 'var(--background-color_accent)',
+						'--border-radius': 'var(--radii_full)',
 						'--align-items': 'center',
 						'--block-size': 32,
-						'--color': 'var(--text-color_neutral)',
+						'--color': 'var(--text-color_accent-inverse)',
 						'--display': 'flex',
 						'--inline-size': 32,
 						'--justify-content': 'center',
 						'--padding': 8,
 					})}
-					type="submit"
 				>
-					<Icon
-						aria-label={currentTheme.label}
-						style={css({
-							'--block-size': 'var(--size_full)',
-							'--inline-size': 'var(--size_full)',
-						})}
-					/>
-				</button>
-			</div>
+					<SelectValue style={css(recipe.visuallyHidden())}>
+						{modeIcon[theme].label}
+					</SelectValue>
+					{React.createElement(modeIcon[theme].icon)}
+				</Button>
+				<Popover
+					placement="bottom end"
+					style={css({
+						'--background-color': 'var(--background-color_neutral)',
+						'--box-shadow': 'var(--shadow_50)',
+						// '--border-color': 'var(--border-color_neutral)',
+						// '--border-style': 'var(---,solid)',
+						// '--border-width': '1px',
+					})}
+				>
+					<ListBox items={options}>
+						{(item) => (
+							<ListBoxItem
+								key={item.key}
+								style={({ isHovered, isFocusVisible, isPressed, isSelected }) =>
+									css({
+										...(isFocusVisible && recipe.focusRing()),
+										'--align-items': 'center',
+										'--background-color':
+											isSelected ? 'var(--background-color_accent)'
+											: isHovered ? 'var(--background-color_neutral-hover)'
+											: isPressed ? 'var(--background-color_neutral-pressed)'
+											: 'var(--background-color_neutral)',
+										'--color':
+											isSelected ?
+												'var(--text-color_accent-inverse)'
+											:	'var(--text-color_neutral)',
+										'--cursor': 'default',
+										'--display': 'flex',
+										'--gap': 8,
+										'--padding-block': 8,
+										'--padding-inline': 16,
+									})
+								}
+							>
+								{React.createElement(item.icon)} {item.label}
+							</ListBoxItem>
+						)}
+					</ListBox>
+				</Popover>
+			</Select>
 		</fetcher.Form>
 	);
 }
