@@ -1,4 +1,4 @@
-import { InferRenderersForComponentBlocks } from '@keystatic/core';
+import { type InferRenderersForComponentBlocks } from '@keystatic/core';
 import {
 	DocumentRenderer as KeystaticDocumentRenderer,
 	type DocumentRendererProps as KeystaticDocumentRendererProps,
@@ -11,7 +11,7 @@ import { Heading } from '#app/components/heading';
 import { Link } from '#app/components/link';
 import * as recipe from '#app/recipes';
 
-import { componentBlocks as editorComponentBlocks } from '../../keystatic.config';
+import { type componentBlocks as editorComponentBlocks } from '../../keystatic.config';
 
 interface DocumentRendererProps extends KeystaticDocumentRendererProps {}
 

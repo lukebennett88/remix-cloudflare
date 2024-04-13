@@ -1,8 +1,8 @@
 import {
 	Link as RemixLink,
-	LinkProps as RemixLinkProps,
+	type LinkProps as RemixLinkProps,
 } from '@remix-run/react';
-import { css, TokenamiStyle } from '@tokenami/css';
+import { css, type TokenamiStyle } from '@tokenami/css';
 import { Fragment } from 'react/jsx-runtime';
 
 import * as recipe from '#app/recipes';

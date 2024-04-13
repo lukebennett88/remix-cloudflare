@@ -1,4 +1,4 @@
-import { css, TokenamiStyle } from '@tokenami/css';
+import { css, type TokenamiStyle } from '@tokenami/css';
 
 import * as recipe from '#app/recipes';
 

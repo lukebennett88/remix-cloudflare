@@ -1,5 +1,5 @@
 import { css } from '@tokenami/css';
-import { TokenamiProperties } from '@tokenami/dev';
+import { type TokenamiProperties } from '@tokenami/dev';
 import { useMemo } from 'react';
 
 type NativeImageProps = React.ImgHTMLAttributes<HTMLImageElement>;

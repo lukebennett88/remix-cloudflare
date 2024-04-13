@@ -1,4 +1,8 @@
-import { json, LoaderFunctionArgs, MetaFunction } from '@remix-run/cloudflare';
+import {
+	json,
+	type LoaderFunctionArgs,
+	type MetaFunction,
+} from '@remix-run/cloudflare';
 import { useLoaderData } from '@remix-run/react';
 
 import { DocumentRenderer } from '#app/components/document-renderer';

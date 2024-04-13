@@ -23,10 +23,10 @@ import '#app/tokenami.css';
 
 import { getFormProps, useForm } from '@conform-to/react';
 import {
-	ActionFunctionArgs,
 	json,
-	LoaderFunctionArgs,
-	MetaFunction,
+	type ActionFunctionArgs,
+	type LoaderFunctionArgs,
+	type MetaFunction,
 } from '@remix-run/cloudflare';
 
 import { ClientHintCheck, getHints, useHints } from '#app/client-hints';
