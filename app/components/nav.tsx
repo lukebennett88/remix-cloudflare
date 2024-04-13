@@ -43,6 +43,10 @@ export function ExternalNav() {
 					label: 'Mastodon',
 				},
 				{
+					href: 'https://bsky.app/profile/lukebennett.com.au',
+					label: 'Bluesky',
+				},
+				{
 					href: 'https://twitter.com/luke_bennett_',
 					label: 'Twitter',
 				},
@@ -94,6 +98,7 @@ function Nav({ justifyContent = 'start', links, ...consumerProps }: NavProps) {
 				<ul
 					style={css({
 						'--display': 'flex',
+						'--flex-wrap': 'wrap',
 						'--gap': 8,
 						'--margin-block-start': 'var(--size_auto)',
 						'--pointer-events': 'auto',
