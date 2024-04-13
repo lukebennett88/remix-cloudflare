@@ -123,11 +123,11 @@ function LinkPost({ entry }: LinkPostProps) {
 					})}
 				>
 					<Link
+						href={entry.linkedUrl}
 						style={css({
 							...center,
 							'--flex-grow': 'var(--flex-grow_0)',
 						})}
-						to={entry.linkedUrl}
 						tone="accent"
 					>
 						<h2
@@ -189,12 +189,12 @@ function BlogPost({ entry, slug }: BlogPostProps) {
 				})}
 			>
 				<Link
+					href={`/posts/${slug}`}
 					style={css({
 						...center,
 						'--flex-grow': 'var(--flex-grow_0)',
 						'--text-decoration-style': entry.isDraft ? 'dashed' : 'solid',
 					})}
-					to={`/posts/${slug}`}
 					tone="accent"
 				>
 					<h2
