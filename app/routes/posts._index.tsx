@@ -1,6 +1,6 @@
 import { json, type MetaFunction } from '@remix-run/cloudflare';
 import { useLoaderData } from '@remix-run/react';
-import { css } from '@tokenami/css';
+import { css, type TokenamiStyle } from '@tokenami/css';
 import { assertNever } from 'emery';
 
 import { reader } from '#app/reader.server.js';
@@ -100,15 +100,7 @@ type LinkPostProps = Awaited<
 
 function LinkPost({ entry }: LinkPostProps) {
 	return (
-		<li
-			style={css({
-				'--border-block-end-color': 'var(--border-color_neutral)',
-				'--border-block-end-style': 'var(---,solid)',
-				'--border-block-end-width': '1px',
-				'--last-child_border-width': 0,
-				'--padding-block': 16,
-			})}
-		>
+		<ListItem>
 			<article
 				style={css({
 					...recipe.stack(),
@@ -117,34 +109,38 @@ function LinkPost({ entry }: LinkPostProps) {
 			>
 				<div
 					style={css({
+						...recipe.typography({
+							capsize: false,
+							size: '18',
+						}),
 						...root,
-						'--gap': 8,
+						'--gap': 24,
 						'--justify-content': 'space-between',
 					})}
 				>
-					<Link
-						href={entry.linkedUrl}
+					<div
 						style={css({
 							...center,
 							'--flex-grow': 'var(--flex-grow_0)',
 						})}
-						tone="accent"
 					>
-						<h2
-							style={css({
-								...recipe.typography({ size: '18' }),
-								'--font-weight': 'var(--weight_700)',
-							})}
-						>
-							{entry.title}
-						</h2>
-					</Link>
+						<Link href={entry.linkedUrl} tone="accent">
+							<Heading
+								level={2}
+								style={css({
+									'--color': 'var(--text-color_accent)',
+								})}
+							>
+								{entry.title}
+							</Heading>
+						</Link>
+					</div>
 					<AlignChildToText>
 						<time
 							dateTime={entry.publishedAt}
 							style={css({
-								...recipe.typography({ size: '14' }),
 								...rail,
+								...recipe.typography({ size: '16' }),
 								'--font-variant-numeric': 'tabular-nums',
 							})}
 						>
@@ -154,15 +150,13 @@ function LinkPost({ entry }: LinkPostProps) {
 				</div>
 				<div
 					style={css({
-						...recipe.stack(),
-						'--gap': 12,
 						'--inline-size': 'var(--size_full)',
 					})}
 				>
 					<DocumentRenderer document={entry.content as any} />
 				</div>
 			</article>
-		</li>
+		</ListItem>
 	);
 }
 
@@ -172,19 +166,11 @@ type BlogPostProps = Awaited<
 
 function BlogPost({ entry, slug }: BlogPostProps) {
 	return (
-		<li
-			style={css({
-				'--border-block-end-color': 'var(--border-color_neutral)',
-				'--border-block-end-style': 'var(---,solid)',
-				'--border-block-end-width': '1px',
-				'--last-child_border-width': 0,
-				'--padding-block': 16,
-			})}
-		>
+		<ListItem>
 			<article
 				style={css({
 					...root,
-					'--gap': 8,
+					'--gap': 24,
 					'--justify-content': 'space-between',
 				})}
 			>
@@ -197,14 +183,14 @@ function BlogPost({ entry, slug }: BlogPostProps) {
 					})}
 					tone="accent"
 				>
-					<h2
+					<Heading
+						level={2}
 						style={css({
-							...recipe.typography({ size: '18' }),
-							'--font-weight': 'var(--weight_700)',
+							'--color': 'var(--text-color_accent)',
 						})}
 					>
 						{entry.title}
-					</h2>
+					</Heading>
 				</Link>
 				<time
 					dateTime={entry.publishedAt}
@@ -216,6 +202,27 @@ function BlogPost({ entry, slug }: BlogPostProps) {
 					{entry.publishedAt}
 				</time>
 			</article>
-		</li>
+		</ListItem>
+	);
+}
+
+interface ListItemProps
+	extends TokenamiStyle<React.HTMLAttributes<HTMLLIElement>> {}
+
+function ListItem(props: ListItemProps) {
+	return (
+		<li
+			{...props}
+			style={css(
+				{
+					'--border-block-end-color': 'var(--border-color_neutral)',
+					'--border-block-end-style': 'var(---,solid)',
+					'--border-block-end-width': '1px',
+					'--last-child_border-width': 0,
+					'--padding-block': 48,
+				},
+				props.style,
+			)}
+		/>
 	);
 }
