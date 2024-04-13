@@ -33,11 +33,109 @@ const componentBlocks = {
 
 const renderers = {
 	block: {
+		blockquote(props) {
+			return (
+				<blockquote
+					{...props}
+					style={css({
+						...recipe.typography({ size: '24' }),
+						...recipe.verticalRhythm(),
+						'--border-inline-start-color': 'var(--border-color_accent)',
+						'--border-inline-start-style': 'var(---,solid)',
+						'--border-inline-start-width': 'var(---,0.25rem)',
+						'--color': 'var(--text-color_neutral)',
+						'--font-style': 'italic',
+						'--padding-block': 'var(---,0.25em)',
+						'--padding-inline-start': 12,
+					})}
+				/>
+			);
+		},
 		code(props) {
-			return <CodeBlock {...props} />;
+			return (
+				<CodeBlock
+					{...props}
+					style={css({
+						...recipe.verticalRhythm(),
+					})}
+				/>
+			);
+		},
+		divider(props) {
+			return (
+				<hr
+					{...props}
+					style={css({
+						...recipe.verticalRhythm(),
+					})}
+				/>
+			);
 		},
 		heading(props) {
-			return <Heading {...props} />;
+			return (
+				<Heading
+					{...props}
+					style={css({
+						...recipe.verticalRhythm(),
+					})}
+				/>
+			);
+		},
+		image(props) {
+			return (
+				<img
+					{...props}
+					style={css({
+						...recipe.verticalRhythm(),
+					})}
+				/>
+			);
+		},
+		list(props) {
+			const listTypes = {
+				ordered: {
+					element: 'ol',
+					listStyleType: 'decimal',
+				},
+				unordered: {
+					element: 'ul',
+					listStyleType: 'disc',
+				},
+			} as const;
+			const listType = listTypes[props.type];
+			const List = listType.element;
+			return (
+				<List
+					style={css({
+						...recipe.verticalRhythm(),
+						'--list-style-position': 'inside',
+						'--list-style-type': listType.listStyleType,
+					})}
+				>
+					{props.children.map((child) => (
+						<li
+							key={child.key}
+							style={css({
+								'--display': 'list-item',
+							})}
+						>
+							{child}
+						</li>
+					))}
+				</List>
+			);
+		},
+		paragraph(props) {
+			return (
+				<p
+					style={css({
+						...recipe.verticalRhythm(),
+						'--text-align': props.textAlign,
+					})}
+				>
+					{props.children}
+				</p>
+			);
 		},
 	},
 	inline: {
@@ -45,9 +143,10 @@ const renderers = {
 			return (
 				<code
 					style={css({
-						...recipe.typography({ size: '14' }),
+						'--color': 'var(--text-color_neutral)',
 						'--display': 'inline-block',
 						'--font-family': 'var(--font-family_mono)',
+						'--font-size': 'var(---,0.75em)',
 						'--font-weight': 'var(--weight_700)',
 					})}
 				>
@@ -60,14 +159,25 @@ const renderers = {
 		},
 		bold(props) {
 			return (
-				<strong style={css({ '--font-weight': 'var(--weight_700)' })}>
+				<strong
+					style={css({
+						'--color': 'var(--text-color_neutral)',
+						'--font-weight': 'var(--weight_700)',
+					})}
+				>
 					{props.children}
 				</strong>
 			);
 		},
 		italic(props) {
 			return (
-				<em style={css({ '--font-style': 'italic' })}>{props.children}</em>
+				<em
+					style={css({
+						'--font-style': 'italic',
+					})}
+				>
+					{props.children}
+				</em>
 			);
 		},
 		keyboard(props) {
@@ -75,14 +185,22 @@ const renderers = {
 		},
 		strikethrough(props) {
 			return (
-				<s style={css({ '--text-decoration-line': 'line-through' })}>
+				<s
+					style={css({
+						'--text-decoration-line': 'line-through',
+					})}
+				>
 					{props.children}
 				</s>
 			);
 		},
 		underline(props) {
 			return (
-				<u style={css({ '--text-decoration': 'underline' })}>
+				<u
+					style={css({
+						'--text-decoration': 'underline',
+					})}
+				>
 					{props.children}
 				</u>
 			);

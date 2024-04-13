@@ -1,20 +1,28 @@
 import { css } from '@tokenami/css';
-
-import * as recipe from '#app/recipes';
+import { type TokenamiProperties } from '@tokenami/dev';
 
 export const codeBlockStyles = css({
-	...recipe.typography({ capsize: false, size: '14' }),
 	'--background-color': 'var(---,#011627)', // these should match the syntax highlighting theme
 	'--color': 'var(---,#d6deeb)', // these should match the syntax highlighting theme
+	'--display': 'inline-block',
 	'--font-family': 'var(--font-family_mono)',
+	'--font-size': 'var(---,0.75em)',
+	'--margin-inline': 'var(--size_auto)',
+	'--max-inline-size': 'var(--size_full)',
 	'--overflow': 'auto',
 	'--padding': 16,
 	'--tab-size': 2,
 });
 
-export function BasicCodeBlock({ children }: { children: string }) {
+export function BasicCodeBlock({
+	children,
+	style,
+}: {
+	children: string;
+	style?: TokenamiProperties;
+}) {
 	return (
-		<pre style={codeBlockStyles}>
+		<pre style={css(codeBlockStyles, style)}>
 			<code>{children}</code>
 		</pre>
 	);

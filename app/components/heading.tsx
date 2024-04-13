@@ -1,12 +1,21 @@
-import { css } from '@tokenami/css';
+import { css, TokenamiStyle } from '@tokenami/css';
 
 import * as recipe from '#app/recipes';
 
-interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
+type HeadingElementProps = TokenamiStyle<
+	React.HTMLAttributes<HTMLHeadingElement>
+>;
+
+interface HeadingProps extends HeadingElementProps {
 	level: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
-export function Heading({ children, level }: HeadingProps) {
+export function Heading({
+	children,
+	level,
+	style,
+	...consumerProps
+}: HeadingProps) {
 	const Tag = `h${level}` as const;
 	const sizeMap = {
 		'1': '35',
@@ -18,13 +27,19 @@ export function Heading({ children, level }: HeadingProps) {
 	} as const satisfies Record<typeof level, recipe.Breakpoint>;
 	return (
 		<Tag
-			style={css({
-				...recipe.typography({
-					size: sizeMap[level],
-				}),
-				'--font-weight': level === 1 ? 'var(--weight_700)' : undefined,
-				'--margin-block-end': level === 1 ? 'var(---,calc(1em/3))' : undefined,
-			})}
+			{...consumerProps}
+			style={css(
+				{
+					...recipe.typography({
+						size: sizeMap[level],
+					}),
+					'--color': 'var(--text-color_neutral)',
+					'--font-weight': 'var(--weight_700)',
+					'--margin-block-end':
+						level === 1 ? 'var(---,calc(1em/3))' : undefined,
+				},
+				style,
+			)}
 		>
 			{children}
 		</Tag>

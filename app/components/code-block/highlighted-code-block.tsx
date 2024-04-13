@@ -1,6 +1,9 @@
+import { css } from '@tokenami/css';
+import { type TokenamiProperties } from '@tokenami/dev';
 import * as React from 'react';
 import { getHighlighterCore } from 'shiki/core';
 import cssLang from 'shiki/langs/css.mjs';
+import htmlLang from 'shiki/langs/html.mjs';
 import javascriptLang from 'shiki/langs/javascript.mjs';
 import jsonLang from 'shiki/langs/json.mjs';
 import markdownLang from 'shiki/langs/markdown.mjs';
@@ -15,6 +18,7 @@ export async function getHighligher() {
 	return await getHighlighterCore({
 		langs: [
 			cssLang,
+			htmlLang,
 			javascriptLang,
 			jsonLang,
 			markdownLang,
@@ -28,6 +32,7 @@ export async function getHighligher() {
 
 const highlightableLangs = [
 	'css',
+	'html',
 	'javascript',
 	'json',
 	'markdown',
@@ -44,9 +49,11 @@ function isHighlightable(lang: string | undefined): lang is HighlightableLang {
 export default function CodeBlock({
 	children,
 	language,
+	style,
 }: {
 	children: string;
 	language?: string;
+	style?: TokenamiProperties;
 }) {
 	const [highlightedCode, setHighlightedCode] = React.useState<string>();
 
@@ -77,13 +84,17 @@ export default function CodeBlock({
 	}, [children, language]);
 
 	if (!highlightedCode) {
-		return <BasicCodeBlock>{children}</BasicCodeBlock>;
+		return (
+			<BasicCodeBlock style={css(codeBlockStyles, style)}>
+				{children}
+			</BasicCodeBlock>
+		);
 	}
 
 	return (
 		<div
 			dangerouslySetInnerHTML={{ __html: highlightedCode }}
-			style={codeBlockStyles}
+			style={css(codeBlockStyles, style)}
 		/>
 	);
 }
