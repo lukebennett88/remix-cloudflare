@@ -3,12 +3,8 @@ import {
 	type LinkProps as RemixLinkProps,
 } from '@remix-run/react';
 import { css, type TokenamiStyle } from '@tokenami/css';
-import { Fragment } from 'react/jsx-runtime';
 
 import * as recipe from '#app/recipes';
-
-import { AlignChildToText } from './align-child-to-text';
-import { ExternalLinkIcon } from './external-link-icon';
 
 export interface LinkProps
 	extends Omit<TokenamiStyle<RemixLinkProps>, 'to'>,
@@ -31,6 +27,9 @@ export function Link({
 				{
 					...recipe.link({ tone }),
 					'--text-wrap': 'pretty',
+					...(isExternal && {
+						'--after_content': "'↝'",
+					}),
 				},
 				style,
 			)}
@@ -38,19 +37,7 @@ export function Link({
 			{...consumerProps}
 		>
 			{children}
-			{isExternal && (
-				<Fragment>
-					&nbsp;
-					<AlignChildToText>
-						<ExternalLinkIcon
-							style={css({
-								'--block-size': 'var(---,0.75em)',
-								'--inline-size': 'var(---,0.75em)',
-							})}
-						/>
-					</AlignChildToText>
-				</Fragment>
-			)}
+			{isExternal && <>&nbsp;</>}
 		</RemixLink>
 	);
 }
