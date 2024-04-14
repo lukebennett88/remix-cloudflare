@@ -133,9 +133,12 @@ function Post({ entry, slug, type }: PostProps) {
 						})}
 						tone="accent"
 					>
-						<h2>
+						<h2
+							style={css({
+								'--display': 'inline',
+							})}
+						>
 							{entry.title}
-							{isLinkPost && <>&nbsp; ↝</>}
 						</h2>
 					</Link>
 					<AlignChildToText>
