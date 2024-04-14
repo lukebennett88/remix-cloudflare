@@ -56,6 +56,7 @@ const renderers = {
 				<CodeBlock
 					{...props}
 					style={css({
+						...recipe.typography({ size: '20' }),
 						...recipe.verticalRhythm(),
 					})}
 				/>
@@ -76,6 +77,7 @@ const renderers = {
 				<Heading
 					{...props}
 					style={css({
+						...recipe.typography({ size: '20' }),
 						...recipe.verticalRhythm(),
 					})}
 				/>
@@ -107,6 +109,7 @@ const renderers = {
 			return (
 				<List
 					style={css({
+						...recipe.typography({ size: '20' }),
 						...recipe.verticalRhythm(),
 						'--list-style-position': 'inside',
 						'--list-style-type': listType.listStyleType,
@@ -116,6 +119,7 @@ const renderers = {
 						<li
 							key={child.key}
 							style={css({
+								...recipe.typography({ size: '20' }),
 								'--display': 'list-item',
 							})}
 						>
@@ -129,6 +133,7 @@ const renderers = {
 			return (
 				<p
 					style={css({
+						...recipe.typography({ size: '20' }),
 						...recipe.verticalRhythm(),
 						'--text-align': props.textAlign,
 					})}
