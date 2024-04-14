@@ -68,11 +68,22 @@ export const meta: MetaFunction<typeof loader> = () => {
 export function Layout({ children }: { children: React.ReactNode }) {
 	const data = useLoaderData<typeof loader>();
 
+	const theme = useTheme();
+
 	const location = useLocation();
 	const isKeystaticRoute = location.pathname.startsWith('/keystatic');
-	const RouteWrapper = isKeystaticRoute ? React.Fragment : NormalRoute;
-
-	const theme = useTheme();
+	const RouteWrapper = React.useMemo(() => {
+		if (isKeystaticRoute) {
+			return React.Fragment;
+		}
+		return function _NormalRoute({ children }: { children: React.ReactNode }) {
+			return (
+				<NormalRoute userPrefs={data.requestInfo.userPrefs}>
+					{children}
+				</NormalRoute>
+			);
+		};
+	}, [data.requestInfo.userPrefs, isKeystaticRoute]);
 
 	return (
 		<html
@@ -115,9 +126,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 					}),
 				})}
 			>
-				<RouteWrapper userPrefs={data.requestInfo.userPrefs}>
-					{children}
-				</RouteWrapper>
+				<RouteWrapper>{children}</RouteWrapper>
 				<ScrollRestoration />
 				<Scripts />
 			</body>
@@ -125,13 +134,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	);
 }
 
-function NormalRoute({
-	children,
-	userPrefs,
-}: {
+interface NormalRouteProps {
 	children: React.ReactNode;
 	userPrefs: ReturnType<typeof useRequestInfo>['userPrefs'];
-}) {
+}
+
+function NormalRoute({ children, userPrefs }: NormalRouteProps) {
 	const { center, rail, root } = recipe.track();
 	return (
 		<React.Fragment>
