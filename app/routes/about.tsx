@@ -1,5 +1,6 @@
 import { json, type MetaFunction } from '@remix-run/cloudflare';
 import { useLoaderData } from '@remix-run/react';
+import { cacheHeader } from 'pretty-cache-header';
 
 import { DocumentRenderer } from '#app/components/document-renderer';
 import { reader } from '#app/reader.server.js';
@@ -12,9 +13,21 @@ export const loader = async () => {
 		throw new Response('Not found', { status: 404 });
 	}
 
-	return json({
-		document: await page.content(),
-	});
+	return json(
+		{
+			document: await page.content(),
+		},
+		{
+			headers: {
+				'Cache-Control': cacheHeader({
+					maxAge: '24 hours',
+					public: true,
+					sMaxage: '48 hours',
+					staleWhileRevalidate: '1 hour',
+				}),
+			},
+		},
+	);
 };
 
 export const meta: MetaFunction<typeof loader> = ({ matches }) => {
