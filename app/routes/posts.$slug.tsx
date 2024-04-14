@@ -4,6 +4,7 @@ import {
 	type MetaFunction,
 } from '@remix-run/cloudflare';
 import { useLoaderData } from '@remix-run/react';
+import { cacheHeader } from 'pretty-cache-header';
 
 import { DocumentRenderer } from '#app/components/document-renderer';
 import { reader } from '#app/reader.server.js';
@@ -26,11 +27,26 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 		throw new Response('Not found', { status: 404 });
 	}
 
-	return json({
-		document: await post.content(),
-		publishedAt: post.publishedAt,
-		title: post.title,
-	});
+	// Drafts not cached, published posts cached for 24 hours
+	const cacheDurationHours = post.isDraft ? 0 : 24;
+
+	return json(
+		{
+			document: await post.content(),
+			publishedAt: post.publishedAt,
+			title: post.title,
+		},
+		{
+			headers: {
+				'Cache-Control': cacheHeader({
+					maxAge: `${cacheDurationHours} hours`,
+					public: true,
+					sMaxage: `${cacheDurationHours} hours`,
+					staleWhileRevalidate: `4 hours`,
+				}),
+			},
+		},
+	);
 };
 
 export const meta: MetaFunction = () => {
