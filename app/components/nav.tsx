@@ -3,8 +3,6 @@ import { css } from '@tokenami/css';
 
 import * as recipe from '#app/recipes';
 
-import { ExternalLinkIcon } from './icons/external-link';
-
 export function InternalNav() {
 	return (
 		<Nav
@@ -68,7 +66,6 @@ interface NavProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 function Nav({ justifyContent = 'start', links, ...consumerProps }: NavProps) {
-	const { root, center, rail } = recipe.track();
 	return (
 		<nav
 			{...consumerProps}
@@ -114,28 +111,13 @@ function Nav({ justifyContent = 'start', links, ...consumerProps }: NavProps) {
 										css({
 											...recipe.link({ tone: isActive ? 'neutral' : 'muted' }),
 											...recipe.typography({ size: '16' }),
-											...root,
 											'--gap': 4,
 										})
 									}
 									to={href}
 								>
-									<span
-										style={css({
-											...center,
-										})}
-									>
-										{label}
-									</span>
-									{isExternal && (
-										<ExternalLinkIcon
-											style={css({
-												...rail,
-												'--block-size': 'var(---,0.75em)',
-												'--inline-size': 'var(---,0.75em)',
-											})}
-										/>
-									)}
+									{label}
+									{isExternal && <>&nbsp;↝</>}
 								</NavLink>
 							</li>
 						);

@@ -120,30 +120,24 @@ function Post({ entry, slug, type }: PostProps) {
 						'--justify-content': 'space-between',
 					})}
 				>
-					<div
+					<Link
+						href={isLinkPost ? entry.linkedUrl : `/posts/${slug}`}
 						style={css({
+							...recipe.typography({
+								size: '28',
+							}),
 							...center,
-							'--flex-grow': 'var(--flex-grow_0)',
+							'--font-weight': 'var(--weight_700)',
+							'--text-decoration-style':
+								!isLinkPost && entry.isDraft ? 'dashed' : 'solid',
 						})}
+						tone="accent"
 					>
-						<Link
-							href={isLinkPost ? entry.linkedUrl : `/posts/${slug}`}
-							style={css({
-								'--text-decoration-style':
-									!isLinkPost && entry.isDraft ? 'dashed' : 'solid',
-							})}
-							tone="accent"
-						>
-							<Heading
-								level={2}
-								style={css({
-									'--color': 'var(--text-color_accent)',
-								})}
-							>
-								{entry.title}
-							</Heading>
-						</Link>
-					</div>
+						<h2>
+							{entry.title}
+							{isLinkPost && <>&nbsp; ↝</>}
+						</h2>
+					</Link>
 					<AlignChildToText>
 						<time
 							dateTime={entry.publishedAt}
