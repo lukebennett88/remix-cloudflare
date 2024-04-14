@@ -1,9 +1,8 @@
 import { createStyleObject } from '@capsizecss/core';
 import fontMetrics from '@capsizecss/metrics/helveticaNeue';
 import { css } from '@tokenami/css';
+import { type TokenamiProperties } from '@tokenami/dev';
 import { typedKeys } from 'emery';
-
-export type TokenamiProperties = Parameters<typeof css>[0];
 
 // Visually Hidden -------------------------------------------------------------
 

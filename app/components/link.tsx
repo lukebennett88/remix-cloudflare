@@ -1,37 +1,62 @@
 import { NavLink, type NavLinkProps } from '@remix-run/react';
-import { css, type TokenamiStyle } from '@tokenami/css';
+import { css } from '@tokenami/css';
+import { type TokenamiProperties } from '@tokenami/dev';
 
 import * as recipe from '#app/recipes';
 
+type NavLinkRenderProps = {
+	isActive: boolean;
+	isPending: boolean;
+	isTransitioning: boolean;
+};
+
 export interface LinkProps
-	extends Omit<TokenamiStyle<NavLinkProps>, 'to'>,
-		recipe.LinkArgs {
-	children: React.ReactNode;
+	extends Omit<NavLinkProps, 'style' | 'to'>,
+		recipe.LinkArgs,
+		recipe.TypographyArgs {
 	href: string;
+	style?:
+		| TokenamiProperties
+		| ((props: NavLinkRenderProps) => TokenamiProperties | undefined);
 }
 
 export function Link({
+	capsize = false,
 	children,
 	href,
-	tone = 'accent',
+	size,
 	style,
+	tone = 'accent',
 	...consumerProps
 }: LinkProps) {
 	const isExternal = href.startsWith('http');
 	return (
 		<NavLink
-			style={css(
-				{
-					...recipe.link({ tone }),
-					'--text-wrap': 'pretty',
-				},
-				style,
-			)}
+			style={(renderProps) =>
+				css(
+					{
+						...recipe.link({ tone }),
+						'--text-wrap': 'pretty',
+					},
+					typeof style === 'function' ? style(renderProps) : style,
+				)
+			}
 			to={href}
 			{...consumerProps}
 		>
-			{children}
-			{isExternal && <>&nbsp;↝</>}
+			{(renderProps) => (
+				<span
+					style={css({
+						...recipe.typography({
+							capsize,
+							size,
+						}),
+					})}
+				>
+					{typeof children === 'function' ? children(renderProps) : children}
+					{isExternal && <>&nbsp;↝</>}
+				</span>
+			)}
 		</NavLink>
 	);
 }

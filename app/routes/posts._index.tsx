@@ -5,6 +5,7 @@ import {
 } from '@remix-run/cloudflare';
 import { useLoaderData } from '@remix-run/react';
 import { css } from '@tokenami/css';
+import { cacheHeader } from 'pretty-cache-header';
 
 import { reader } from '#app/reader.server.js';
 import * as recipe from '#app/recipes';
@@ -44,13 +45,25 @@ export const loader = async () => {
 		),
 	]);
 
-	return json({
-		posts: [...linkPosts, ...blogPosts].sort(
-			(a, b) =>
-				new Date(b.entry.publishedAt).getTime() -
-				new Date(a.entry.publishedAt).getTime(),
-		),
-	});
+	return json(
+		{
+			posts: [...linkPosts, ...blogPosts].sort(
+				(a, b) =>
+					new Date(b.entry.publishedAt).getTime() -
+					new Date(a.entry.publishedAt).getTime(),
+			),
+		},
+		{
+			headers: {
+				'Cache-Control': cacheHeader({
+					maxAge: '10 minutes',
+					public: true,
+					sMaxage: '20 minutes',
+					staleWhileRevalidate: '5 minutes',
+				}),
+			},
+		},
+	);
 };
 
 export const meta: MetaFunction = () => {
@@ -121,12 +134,12 @@ function Post({ entry, slug, type }: PostProps) {
 					})}
 				>
 					<Link
+						capsize
 						href={isLinkPost ? entry.linkedUrl : `/posts/${slug}`}
+						size="28"
 						style={css({
-							...recipe.typography({
-								size: '28',
-							}),
 							...center,
+							'--flex-grow': 'var(--flex-grow_0)',
 							'--font-weight': 'var(--weight_700)',
 							'--text-decoration-style':
 								!isLinkPost && entry.isDraft ? 'dashed' : 'solid',

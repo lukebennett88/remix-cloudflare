@@ -1,7 +1,8 @@
-import { NavLink } from '@remix-run/react';
 import { css } from '@tokenami/css';
 
 import * as recipe from '#app/recipes';
+
+import { Link } from './link';
 
 export function InternalNav() {
 	return (
@@ -96,7 +97,7 @@ function Nav({ justifyContent = 'start', links, ...consumerProps }: NavProps) {
 					style={css({
 						'--display': 'flex',
 						'--flex-wrap': 'wrap',
-						'--gap': 8,
+						'--gap': 24,
 						'--margin-block-start': 'var(--size_auto)',
 						'--pointer-events': 'auto',
 					})}
@@ -105,20 +106,21 @@ function Nav({ justifyContent = 'start', links, ...consumerProps }: NavProps) {
 						const isExternal = href.startsWith('http');
 						return (
 							<li key={href}>
-								<NavLink
+								<Link
+									href={href}
 									rel={isExternal ? 'me' : undefined}
+									size="16"
 									style={({ isActive }) =>
 										css({
-											...recipe.link({ tone: isActive ? 'neutral' : 'muted' }),
-											...recipe.typography({ size: '16' }),
+											...recipe.link({
+												tone: isActive ? 'neutral' : 'muted',
+											}),
 											'--gap': 4,
 										})
 									}
-									to={href}
 								>
 									{label}
-									{isExternal && <>&nbsp;↝</>}
-								</NavLink>
+								</Link>
 							</li>
 						);
 					})}
