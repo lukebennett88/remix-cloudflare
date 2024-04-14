@@ -36,6 +36,7 @@ export function Link({
 				css(
 					{
 						...recipe.link({ tone }),
+						'--font-weight': 'var(--weight_700)',
 						'--text-wrap': 'pretty',
 					},
 					typeof style === 'function' ? style(renderProps) : style,
@@ -47,10 +48,11 @@ export function Link({
 			{(renderProps) => (
 				<span
 					style={css({
-						...recipe.typography({
-							capsize,
-							size,
-						}),
+						...(size &&
+							recipe.typography({
+								capsize,
+								size,
+							})),
 					})}
 				>
 					{typeof children === 'function' ? children(renderProps) : children}

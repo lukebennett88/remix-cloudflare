@@ -337,6 +337,7 @@ export default createConfig({
 	},
 	selectors: {
 		...defaultConfig['selectors'],
+		marker: '&::marker',
 		selection: '&::selection',
 	},
 	theme: {

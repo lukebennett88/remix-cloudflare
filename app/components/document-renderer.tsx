@@ -77,7 +77,6 @@ const renderers = {
 				<Heading
 					{...props}
 					style={css({
-						...recipe.typography({ size: '20' }),
 						...recipe.verticalRhythm(),
 					})}
 				/>
@@ -119,8 +118,13 @@ const renderers = {
 						<li
 							key={child.key}
 							style={css({
-								...recipe.typography({ size: '20' }),
+								...recipe.typography({ capsize: false, size: '20' }),
+								'--margin-block-start': 'var(---,0.5em)',
+								'--margin-block-end': 'var(---,0.5em)',
+								'--first-child_margin-block-start': 0,
+								'--last-child_margin-block-end': 0,
 								'--display': 'list-item',
+								'--marker_color': 'var(---,var(--border-color_accent))',
 							})}
 						>
 							{child}
