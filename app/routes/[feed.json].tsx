@@ -6,9 +6,9 @@ import { getFeed } from '../lib/get-feed';
 export const loader: LoaderFunction = async () => {
 	const feed = await getFeed();
 
-	return new Response(feed.rss2(), {
+	return new Response(feed.atom1(), {
 		headers: {
-			'Content-Type': 'application/rss+xml',
+			'Content-Type': 'application/json',
 			'Cache-Control': cacheHeader({
 				maxAge: '15 minutes',
 				public: true,

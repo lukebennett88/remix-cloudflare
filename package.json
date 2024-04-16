@@ -82,6 +82,7 @@
 		"@tokenami/css": "0.0.40",
 		"cookie": "^0.6.0",
 		"emery": "^1.4.3",
+		"feed": "^4.2.2",
 		"isbot": "^5.1.4",
 		"miniflare": "^3.20240405.1",
 		"pretty-cache-header": "^1.0.0",

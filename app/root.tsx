@@ -44,8 +44,8 @@ import { LaptopIcon } from '#app/components/icons/laptop';
 import { MoonIcon } from '#app/components/icons/moon';
 import { SunIcon } from '#app/components/icons/sun';
 import { useNonce } from '#app/context/nonce-context';
+import { useRequestInfo } from '#app/lib/request-info';
 import { getTheme, setTheme, type Theme } from '#app/theme.server';
-import { useRequestInfo } from '#app/utils/request-info';
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
 	return json({

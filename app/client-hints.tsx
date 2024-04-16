@@ -10,7 +10,7 @@ import {
 import { useRevalidator } from '@remix-run/react';
 import * as React from 'react';
 
-import { useRequestInfo } from '#app/utils/request-info';
+import { useRequestInfo } from '#app/lib/request-info.js';
 
 const hintsUtils = getHintUtils({
 	theme: colorSchemeHint,

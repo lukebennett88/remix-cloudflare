@@ -23,7 +23,7 @@ export function InternalNav() {
 					label: 'About',
 				},
 				{
-					href: '/feed',
+					href: '/feed.xml',
 					label: 'RSS Feed',
 				},
 			]}
