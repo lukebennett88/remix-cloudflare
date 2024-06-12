@@ -25,6 +25,7 @@ export default async function handleRequest(...args: DocRequestArgs) {
 		remixContext,
 		loadContext,
 	] = args;
+	// eslint-disable-next-line no-constant-binary-expression
 	const nonce = String(loadContext.cspNonce ?? '') ?? undefined;
 	const body = await renderToReadableStream(
 		<NonceProvider value={nonce}>
